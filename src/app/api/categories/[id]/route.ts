@@ -1,47 +1,50 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import prisma from '@/lib/prisma'
+
+export const dynamic = 'force-dynamic'
 
 export async function PATCH(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
         const body = await req.json()
-        const { name, name_ar, slug, is_active } = body
+        const { nameEn, nameAr, slug, isActive } = body
 
-        const { data: category, error } = await supabase
-            .from('categories')
-            .update({ name, name_ar, slug, is_active })
-            .eq('id', id)
-            .select()
-            .single()
-
-        if (error) throw error
+        const category = await prisma.category.update({
+            where: { id },
+            data: {
+                ...(nameEn !== undefined && { nameEn }),
+                ...(nameAr !== undefined && { nameAr }),
+                ...(slug !== undefined && { slug }),
+                ...(isActive !== undefined && { isActive })
+            }
+        })
 
         return NextResponse.json(category)
     } catch (error: any) {
+        console.error('Category Update Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to update category' }, { status: 500 })
     }
 }
 
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
 
-        // Soft delete by setting is_active to false
-        const { error } = await supabase
-            .from('categories')
-            .update({ is_active: false })
-            .eq('id', id)
+        // Soft delete by setting isActive to false
+        const category = await prisma.category.update({
+            where: { id },
+            data: { isActive: false }
+        })
 
-        if (error) throw error
-
-        return NextResponse.json({ success: true })
+        return NextResponse.json({ success: true, category })
     } catch (error: any) {
+        console.error('Category Deletion Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to delete category' }, { status: 500 })
     }
 }

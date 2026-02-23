@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import crypto from 'crypto'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: Request) {
     try {
         const body = await req.json()
@@ -21,12 +23,12 @@ export async function POST(req: Request) {
         // ... HMAC verification logic ...
 
         if (success && !pending) {
-            // Update order status to PAID
+            // Update order status to PROCESSING (meaning paid and being prepared)
             await prisma.order.updateMany({
                 where: { paymobOrderId },
                 data: {
                     paymentStatus: 'paid',
-                    status: 'PROCESSING' // Or whatever status comes after pending
+                    status: 'PROCESSING'
                 }
             })
         } else if (!success && !pending) {

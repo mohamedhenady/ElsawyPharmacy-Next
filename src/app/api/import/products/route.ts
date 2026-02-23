@@ -50,10 +50,12 @@ export async function POST(req: Request) {
                 })
 
                 if (!category) {
+                    const slug = categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `cat-${Date.now()}`
                     category = await prisma.category.create({
                         data: {
                             nameEn: categoryName,
-                            nameAr: categoryName, // Fallback to same name for both if only one provided
+                            nameAr: categoryName,
+                            slug,
                         },
                     })
                 }
@@ -71,10 +73,12 @@ export async function POST(req: Request) {
                     })
 
                     if (!subcategory) {
+                        const subSlug = subcategoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `sub-${Date.now()}`
                         subcategory = await prisma.category.create({
                             data: {
                                 nameEn: subcategoryName,
                                 nameAr: subcategoryName,
+                                slug: subSlug,
                                 parentId: category.id,
                             },
                         })

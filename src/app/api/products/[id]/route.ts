@@ -1,24 +1,25 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import prisma from '@/lib/prisma'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
 
-        const { data: product, error } = await supabase
-            .from('products')
-            .select('*, categories(*)')
-            .eq('id', id)
-            .single()
-
-        if (error) {
-            if (error.code === 'PGRST116') {
-                return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+        const product = await prisma.product.findUnique({
+            where: { id },
+            include: {
+                category: true,
+                subcategory: true
             }
-            throw error
+        })
+
+        if (!product) {
+            return NextResponse.json({ error: 'Product not found' }, { status: 404 })
         }
 
         return NextResponse.json(product)
@@ -30,43 +31,38 @@ export async function GET(
 
 export async function PATCH(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
         const body = await req.json()
 
-        const { data: product, error } = await supabase
-            .from('products')
-            .update(body)
-            .eq('id', id)
-            .select()
-            .single()
-
-        if (error) throw error
+        const product = await prisma.product.update({
+            where: { id },
+            data: body
+        })
 
         return NextResponse.json(product)
     } catch (error: any) {
+        console.error('Product Update Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to update product' }, { status: 500 })
     }
 }
 
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
 
-        const { error } = await supabase
-            .from('products')
-            .delete()
-            .eq('id', id)
-
-        if (error) throw error
+        await prisma.product.delete({
+            where: { id }
+        })
 
         return NextResponse.json({ success: true })
     } catch (error: any) {
+        console.error('Product Deletion Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to delete product' }, { status: 500 })
     }
 }

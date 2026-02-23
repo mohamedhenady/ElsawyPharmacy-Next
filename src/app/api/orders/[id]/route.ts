@@ -1,47 +1,58 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import prisma from '@/lib/prisma'
+
+export const dynamic = 'force-dynamic'
 
 export async function PATCH(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
         const body = await req.json()
-        const { status, payment_status } = body
+        const { status, paymentStatus } = body
 
-        const { data: order, error } = await supabase
-            .from('orders')
-            .update({ status, payment_status })
-            .eq('id', id)
-            .select()
-            .single()
-
-        if (error) throw error
+        const order = await prisma.order.update({
+            where: { id },
+            data: {
+                ...(status && { status }),
+                ...(paymentStatus && { paymentStatus })
+            }
+        })
 
         return NextResponse.json(order)
     } catch (error: any) {
+        console.error('Order Update Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to update order' }, { status: 500 })
     }
 }
 
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
 
-        const { data: order, error } = await supabase
-            .from('orders')
-            .select('*, order_items(*, products(*))')
-            .eq('id', id)
-            .single()
+        const order = await prisma.order.findUnique({
+            where: { id },
+            include: {
+                items: {
+                    include: {
+                        product: true
+                    }
+                },
+                user: true
+            }
+        })
 
-        if (error) throw error
+        if (!order) {
+            return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+        }
 
         return NextResponse.json(order)
     } catch (error: any) {
+        console.error('Fetch Order Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to fetch order' }, { status: 500 })
     }
 }
