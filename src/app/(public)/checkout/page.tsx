@@ -51,11 +51,11 @@ export default function CheckoutPage() {
 
         try {
             const orderData = {
-                total_price: getTotalPrice(),
-                shipping_address: `${formData.address}, ${formData.city}`,
-                payment_method: formData.payment_method,
+                totalPrice: getTotalPrice(),
+                shippingAddress: `${formData.address}, ${formData.city}`,
+                paymentMethod: formData.payment_method,
                 items: items.map(item => ({
-                    product_id: item.id,
+                    productId: item.id,
                     quantity: item.quantity,
                     price: item.price
                 }))
@@ -75,7 +75,7 @@ export default function CheckoutPage() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         amount: getTotalPrice(),
-                        items: items.map(i => ({ name: i.name_ar, amount_cents: i.price * 100, quantity: i.quantity })),
+                        items: items.map(i => ({ name: i.nameAr, amount_cents: i.price * 100, quantity: i.quantity })),
                         billing_data: {
                             first_name: formData.full_name.split(' ')[0],
                             last_name: formData.full_name.split(' ')[1] || "User",
@@ -302,7 +302,7 @@ export default function CheckoutPage() {
                                             <span className="text-2xl">💊</span>
                                         </div>
                                         <div className="flex-1 space-y-1">
-                                            <p className="font-black text-sm text-slate-800 line-clamp-1">{item.name_ar}</p>
+                                            <p className="font-black text-sm text-slate-800 line-clamp-1">{item.nameAr}</p>
                                             <p className="text-xs font-bold text-slate-400">{item.quantity} × {item.price} ر.س</p>
                                         </div>
                                         <p className="font-black text-slate-900">{(item.price * item.quantity).toFixed(0)}</p>

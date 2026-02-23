@@ -75,8 +75,8 @@ export default function CartPage() {
                                     className="bg-white p-8 rounded-[2.5rem] border border-slate-100 flex flex-col md:flex-row items-center gap-8 shadow-sm hover:shadow-md transition-shadow relative group"
                                 >
                                     <div className="w-32 h-32 bg-slate-50 rounded-[1.5rem] flex items-center justify-center shrink-0 border border-slate-100 p-4 transition-transform group-hover:scale-105 duration-500">
-                                        {item.image_url ? (
-                                            <img src={item.image_url} alt={item.name_ar} className="w-full h-full object-contain" />
+                                        {item.imageUrl ? (
+                                            <img src={item.imageUrl} alt={item.nameAr} className="w-full h-full object-contain" />
                                         ) : (
                                             <span className="text-5xl">💊</span>
                                         )}
@@ -84,7 +84,7 @@ export default function CartPage() {
 
                                     <div className="flex-1 space-y-2 text-center md:text-right">
                                         <p className="text-xs font-black text-primary/60 uppercase tracking-widest">صيدلية الصاوي</p>
-                                        <h3 className="text-2xl font-black text-slate-800">{item.name_ar}</h3>
+                                        <h3 className="text-2xl font-black text-slate-800">{item.nameAr}</h3>
                                         <p className="text-2xl font-black text-secondary">{item.price} <span className="text-sm">ر.س</span></p>
                                     </div>
 
