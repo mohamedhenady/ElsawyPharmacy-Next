@@ -5,7 +5,7 @@ export function createClient() {
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
     if (!supabaseUrl || !supabaseUrl.startsWith('http')) {
-        return null as any;
+        return null;
     }
 
     return createBrowserClient(

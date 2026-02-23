@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getPaymobToken, registerPaymobOrder, getPaymentKey } from '@/lib/paymob'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: Request) {
     try {
         const body = await req.json()

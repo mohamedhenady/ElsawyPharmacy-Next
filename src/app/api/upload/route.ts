@@ -2,6 +2,8 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: Request) {
     try {
         const formData = await req.formData()
@@ -54,8 +56,9 @@ export async function POST(req: Request) {
             .getPublicUrl(filePath)
 
         return NextResponse.json({ url: publicUrl })
-    } catch (error: any) {
+    } catch (error) {
         console.error('Upload Error:', error)
-        return NextResponse.json({ error: error.message || 'Upload failed' }, { status: 500 })
+        const message = error instanceof Error ? error.message : 'Upload failed'
+        return NextResponse.json({ error: message }, { status: 500 })
     }
 }

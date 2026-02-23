@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { Product as GlobalProduct } from '@/types';
 
 export interface CartItem {
     id: string;
@@ -12,7 +13,7 @@ export interface CartItem {
 
 interface CartStore {
     items: CartItem[];
-    addItem: (product: any) => void;
+    addItem: (product: GlobalProduct) => void;
     removeItem: (productId: string) => void;
     updateQuantity: (productId: string, quantity: number) => void;
     clearCart: () => void;
@@ -42,11 +43,11 @@ export const useCartStore = create<CartStore>()(
                             ...currentItems,
                             {
                                 id: product.id,
-                                nameEn: product.nameEn,
-                                nameAr: product.nameAr,
+                                nameEn: product.name_en || product.name_ar,
+                                nameAr: product.name_ar,
                                 price: product.price,
                                 quantity: 1,
-                                imageUrl: product.imageUrl,
+                                imageUrl: product.image_url,
                             },
                         ],
                     });

@@ -1,5 +1,21 @@
 const PAYMOB_BASE_URL = 'https://accept.paymob.com/api'
 
+interface PaymobOrderItem {
+    name: string;
+    amount_cents: number;
+    description?: string;
+    quantity: number;
+}
+
+interface PaymobBillingData {
+    email?: string;
+    first_name?: string;
+    last_name?: string;
+    phone_number?: string;
+    city?: string;
+    street?: string;
+}
+
 export async function getPaymobToken() {
     const res = await fetch(`${PAYMOB_BASE_URL}/auth/tokens`, {
         method: 'POST',
@@ -10,7 +26,7 @@ export async function getPaymobToken() {
     return data.token
 }
 
-export async function registerPaymobOrder(token: string, amount_cents: number, items: any[]) {
+export async function registerPaymobOrder(token: string, amount_cents: number, items: PaymobOrderItem[]) {
     const res = await fetch(`${PAYMOB_BASE_URL}/ecommerce/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -26,7 +42,7 @@ export async function registerPaymobOrder(token: string, amount_cents: number, i
     return data.id
 }
 
-export async function getPaymentKey(token: string, orderId: string, amount_cents: number, billingData: any) {
+export async function getPaymentKey(token: string, orderId: string, amount_cents: number, billingData: PaymobBillingData) {
     const res = await fetch(`${PAYMOB_BASE_URL}/acceptance/payment_keys`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

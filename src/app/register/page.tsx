@@ -25,6 +25,8 @@ export default function RegisterPage() {
         setError(null)
 
         try {
+            if (!supabase) throw new Error("Supabase is not configured")
+
             const { data, error } = await supabase.auth.signUp({
                 email,
                 password,
@@ -46,8 +48,9 @@ export default function RegisterPage() {
                 alert("تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.")
                 router.push('/login')
             }
-        } catch (err: any) {
-            setError(err.message || "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.")
+        } catch (err) {
+            const message = err instanceof Error ? err.message : "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى."
+            setError(message)
         } finally {
             setLoading(false)
         }

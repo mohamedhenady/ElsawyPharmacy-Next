@@ -75,6 +75,10 @@ export default function AdminProductsPage() {
 
         setUploading(true)
         try {
+            if (!supabase) {
+                alert('تعديل Supabase غير صحيح.')
+                return
+            }
             const fileExt = file.name.split('.').pop()
             const fileName = `${Math.random()}.${fileExt}`
             const filePath = `products/${fileName}`
