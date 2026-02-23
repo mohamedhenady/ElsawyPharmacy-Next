@@ -94,8 +94,8 @@ export default function CategoriesPage() {
                                             <div className="w-20 h-20 rounded-3xl bg-white shadow-xl flex items-center justify-center text-4xl group-hover:rotate-12 transition-transform duration-500 border border-slate-100 text-right">
                                                 {style.icon}
                                             </div>
-                                            <h2 className={cn("text-3xl font-black text-right", style.text)}>{cat.name_ar}</h2>
-                                            <p className="text-muted-foreground font-medium text-right">استكشف منتجات {cat.name_ar}</p>
+                                            <h2 className={cn("text-3xl font-black text-right", style.text)}>{cat.nameAr}</h2>
+                                            <p className="text-muted-foreground font-medium text-right">استكشف منتجات {cat.nameAr}</p>
                                         </div>
                                         <Link href={`/products?categoryId=${cat.id}`}>
                                             <motion.div

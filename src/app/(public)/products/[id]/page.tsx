@@ -98,10 +98,10 @@ export default function ProductDetailsPage() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 className="relative w-full aspect-square flex items-center justify-center"
                             >
-                                {product.image_url ? (
+                                {product.imageUrl ? (
                                     <img
-                                        src={product.image_url}
-                                        alt={product.name_ar}
+                                        src={product.imageUrl}
+                                        alt={product.nameAr}
                                         className="w-4/5 h-4/5 object-contain"
                                     />
                                 ) : (
@@ -123,7 +123,7 @@ export default function ProductDetailsPage() {
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3">
                                     <Badge className="bg-primary/10 text-primary border-none font-black px-4 py-1">
-                                        {product.categories?.name_ar || 'منتج صحي'}
+                                        {product.categories?.nameAr || 'منتج صحي'}
                                     </Badge>
                                     <div className="flex items-center gap-1 text-amber-400">
                                         <Star className="w-4 h-4 fill-current" />
@@ -132,10 +132,10 @@ export default function ProductDetailsPage() {
                                     </div>
                                 </div>
                                 <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
-                                    {product.name_ar}
+                                    {product.nameAr}
                                 </h1>
                                 <p className="text-xl text-muted-foreground leading-relaxed">
-                                    {product.description_ar || 'لا يوجد وصف متاح لهذا المنتج حالياً.'}
+                                    {product.description || 'لا يوجد وصف متاح لهذا المنتج حالياً.'}
                                 </p>
                             </div>
 
@@ -201,7 +201,7 @@ export default function ProductDetailsPage() {
                     <div className="lg:col-span-2 bg-white p-12 rounded-[3rem] shadow-sm border space-y-8">
                         <h3 className="text-2xl font-black">تفاصيل إضافية</h3>
                         <div className="prose prose-slate max-w-none text-muted-foreground leading-loose">
-                            <p>{product.description_ar || 'اكتشف الجودة والفعالية مع منتجاتنا المختارة بعناية لتلبية كافة احتياجاتك الصحية والتجميلية.'}</p>
+                            <p>{product.description || 'اكتشف الجودة والفعالية مع منتجاتنا المختارة بعناية لتلبية كافة احتياجاتك الصحية والتجميلية.'}</p>
                         </div>
                     </div>
                     <div className="bg-primary/5 p-12 rounded-[3rem] shadow-sm border border-primary/10 space-y-6">

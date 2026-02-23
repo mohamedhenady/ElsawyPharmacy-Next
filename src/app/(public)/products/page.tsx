@@ -53,8 +53,8 @@ export default function ProductsPage() {
     }, [selectedCategory])
 
     const filteredProducts = products.filter(p =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.name_ar.includes(searchQuery)
+        p.nameEn.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.nameAr.includes(searchQuery)
     )
 
     return (
@@ -116,7 +116,7 @@ export default function ProductsPage() {
                                                     : "hover:bg-slate-50 text-slate-600"
                                             )}
                                         >
-                                            {cat.name_ar}
+                                            {cat.nameAr}
                                         </button>
                                     ))}
                                 </div>
@@ -191,10 +191,10 @@ export default function ProductsPage() {
                                                 "relative bg-slate-50 flex items-center justify-center overflow-hidden shrink-0",
                                                 view === "grid" ? "aspect-square w-full" : "w-48 h-48 rounded-[2rem]"
                                             )}>
-                                                {product.image_url ? (
+                                                {product.imageUrl ? (
                                                     <img
-                                                        src={product.image_url}
-                                                        alt={product.name_ar}
+                                                        src={product.imageUrl}
+                                                        alt={product.nameAr}
                                                         className="w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-700"
                                                     />
                                                 ) : (
@@ -213,9 +213,9 @@ export default function ProductsPage() {
                                             <div className="p-8 space-y-6 flex-1">
                                                 <div className="space-y-2">
                                                     <p className="text-sm font-bold text-primary uppercase tracking-widest opacity-60">
-                                                        {product.categories?.name_ar || 'تصنيف عام'}
+                                                        {product.categories?.nameAr || 'تصنيف عام'}
                                                     </p>
-                                                    <h3 className="text-xl font-bold text-slate-800 leading-tight group-hover:text-primary transition-colors line-clamp-2">{product.name_ar}</h3>
+                                                    <h3 className="text-xl font-bold text-slate-800 leading-tight group-hover:text-primary transition-colors line-clamp-2">{product.nameAr}</h3>
                                                     <div className="flex items-center gap-2">
                                                         <div className="flex text-amber-400">
                                                             <Star className="w-4 h-4 fill-current" />

@@ -3,11 +3,11 @@ import { persist } from 'zustand/middleware';
 
 export interface CartItem {
     id: string;
-    name: string;
-    name_ar: string;
+    nameEn: string;
+    nameAr: string;
     price: number;
     quantity: number;
-    image_url?: string;
+    imageUrl?: string;
 }
 
 interface CartStore {
@@ -42,11 +42,11 @@ export const useCartStore = create<CartStore>()(
                             ...currentItems,
                             {
                                 id: product.id,
-                                name: product.name,
-                                name_ar: product.name_ar,
+                                nameEn: product.nameEn,
+                                nameAr: product.nameAr,
                                 price: product.price,
                                 quantity: 1,
-                                image_url: product.image_url,
+                                imageUrl: product.imageUrl,
                             },
                         ],
                     });

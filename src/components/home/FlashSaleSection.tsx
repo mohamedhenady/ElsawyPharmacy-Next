@@ -10,10 +10,10 @@ import { cn } from "@/lib/utils"
 
 interface FlashSaleProduct {
     id: string
-    name_ar: string
+    nameAr: string
     price: number
     original_price: number
-    image_url?: string
+    imageUrl?: string
     discount: number
     stock: number
     sold: number
@@ -26,10 +26,10 @@ export function FlashSaleSection() {
 
     useEffect(() => {
         setProducts([
-            { id: 'f1', name_ar: 'فيكس فاب روب', price: 75, original_price: 150, discount: 50, stock: 15, sold: 85, image_url: null },
-            { id: 'f2', name_ar: 'لوريال سيروم', price: 199, original_price: 350, discount: 43, stock: 8, sold: 92, image_url: null },
-            { id: 'f3', name_ar: 'بانadol_extra', price: 45, original_price: 85, discount: 47, stock: 23, sold: 77, image_url: null },
-            { id: 'f4', name_ar: 'فيتو سي اقراص', price: 180, original_price: 280, discount: 36, stock: 5, sold: 95, image_url: null },
+            { id: 'f1', nameAr: 'فيكس فاب روب', price: 75, original_price: 150, discount: 50, stock: 15, sold: 85, imageUrl: undefined },
+            { id: 'f2', nameAr: 'لوريال سيروم', price: 199, original_price: 350, discount: 43, stock: 8, sold: 92, imageUrl: undefined },
+            { id: 'f3', nameAr: 'بانadol_extra', price: 45, original_price: 85, discount: 47, stock: 23, sold: 77, imageUrl: undefined },
+            { id: 'f4', nameAr: 'فيتو سي اقراص', price: 180, original_price: 280, discount: 36, stock: 5, sold: 95, imageUrl: undefined },
         ])
 
         const targetDate = new Date()
@@ -109,8 +109,8 @@ export function FlashSaleSection() {
                                 >
                                     <div className="relative mb-4">
                                         <div className="aspect-square bg-slate-50 rounded-xl flex items-center justify-center overflow-hidden">
-                                            {product.image_url ? (
-                                                <img src={product.image_url} alt={product.name_ar} className="w-full h-full object-contain" />
+                                            {product.imageUrl ? (
+                                                <img src={product.imageUrl} alt={product.nameAr} className="w-full h-full object-contain" />
                                             ) : (
                                                 <span className="text-5xl">💊</span>
                                             )}
@@ -121,7 +121,7 @@ export function FlashSaleSection() {
                                         </Badge>
                                     </div>
 
-                                    <h3 className="font-bold text-slate-900 mb-2 line-clamp-1">{product.name_ar}</h3>
+                                    <h3 className="font-bold text-slate-900 mb-2 line-clamp-1">{product.nameAr}</h3>
 
                                     <div className="flex items-center gap-2 mb-3">
                                         <span className="text-xl font-black text-red-500">{product.price} ر.س</span>

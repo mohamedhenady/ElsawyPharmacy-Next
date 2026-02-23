@@ -70,15 +70,15 @@ export function RecentlyViewedSection() {
                         >
                             <Link href={`/products/${product.id}`}>
                                 <div className="aspect-square bg-slate-50 rounded-2xl flex items-center justify-center mb-4 overflow-hidden">
-                                    {product.image_url ? (
-                                        <img src={product.image_url} alt={product.name_ar} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+                                    {product.imageUrl ? (
+                                        <img src={product.imageUrl} alt={product.nameAr} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
                                     ) : (
                                         <span className="text-5xl group-hover:scale-110 transition-transform duration-500">💊</span>
                                     )}
                                 </div>
                             </Link>
 
-                            <h3 className="font-bold text-lg mb-2 line-clamp-1">{product.name_ar}</h3>
+                            <h3 className="font-bold text-lg mb-2 line-clamp-1">{product.nameAr}</h3>
                             <p className="text-2xl font-black text-secondary mb-4">{product.price} ر.س</p>
 
                             <div className="flex gap-2">

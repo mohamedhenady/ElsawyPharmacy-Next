@@ -203,7 +203,7 @@ export default function HomePage() {
                                 <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500">
                                     <span className="text-4xl">💊</span>
                                 </div>
-                                <span className={cn("font-bold text-xl text-emerald-700")}>{cat.name_ar}</span>
+                                <span className={cn("font-bold text-xl text-emerald-700")}>{cat.nameAr}</span>
                             </motion.div>
                         </Link>
                     ))}
@@ -227,15 +227,15 @@ export default function HomePage() {
                             className="glass-card rounded-[2.5rem] p-6 border border-white/50 flex flex-col gap-4 shadow-sm hover:shadow-xl transition-all"
                         >
                             <div className="aspect-square bg-white/40 rounded-[2rem] overflow-hidden flex items-center justify-center">
-                                {product.image_url ? (
-                                    <img src={product.image_url} alt={product.name_ar} className="w-3/4 h-3/4 object-contain" />
+                                {product.imageUrl ? (
+                                    <img src={product.imageUrl} alt={product.nameAr} className="w-3/4 h-3/4 object-contain" />
                                 ) : (
                                     <span className="text-6xl">💊</span>
                                 )}
                             </div>
                             <div>
-                                <h3 className="font-bold text-lg mb-1">{product.name_ar}</h3>
-                                <p className="text-sm text-muted-foreground line-clamp-2">{product.description_ar}</p>
+                                <h3 className="font-bold text-lg mb-1">{product.nameAr}</h3>
+                                <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
                             </div>
                             <div className="flex items-center justify-between mt-auto">
                                 <p className="text-secondary font-black text-xl">{product.price} ر.س</p>

@@ -1,65 +1,80 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import prisma from '@/lib/prisma'
 
 // GET all products with filtering
 export async function GET(req: Request) {
-    if (!supabase) {
-        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
-    }
     try {
         const { searchParams } = new URL(req.url)
         const categoryId = searchParams.get('categoryId')
         const isFeatured = searchParams.get('isFeatured')
+        const search = searchParams.get('search')
 
-        let query = supabase.from('products').select('*, categories(*)')
-
-        if (categoryId) {
-            query = query.eq('category_id', categoryId)
-        }
-        if (isFeatured === 'true') {
-            query = query.eq('is_featured', true)
-        }
-
-        const { data: products, error } = await query.order('created_at', { ascending: false })
-
-        if (error) throw error
+        const products = await prisma.product.findMany({
+            where: {
+                isActive: true,
+                ...(categoryId && { categoryId }),
+                ...(isFeatured === 'true' && { isFeatured: true }),
+                ...(search && {
+                    OR: [
+                        { nameEn: { contains: search, mode: 'insensitive' } },
+                        { nameAr: { contains: search, mode: 'insensitive' } },
+                        { sku: { contains: search, mode: 'insensitive' } }
+                    ]
+                })
+            },
+            include: {
+                category: true,
+                subcategory: true
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
 
         return NextResponse.json(products)
     } catch (error: any) {
+        console.error('Fetch Products Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to fetch products' }, { status: 500 })
     }
 }
 
 // POST create a new product
 export async function POST(req: Request) {
-    if (!supabase) {
-        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
-    }
     try {
         const body = await req.json()
-        const { name, name_ar, description, description_ar, price, stock, category_id, image_url, is_featured } = body
+        const {
+            sku,
+            nameEn,
+            nameAr,
+            description,
+            price,
+            discountPrice,
+            stock,
+            categoryId,
+            subcategoryId,
+            imageUrl,
+            isFeatured
+        } = body
 
-        if (!name || !name_ar || !price || !category_id) {
+        if (!sku || !nameEn || !nameAr || !price || !categoryId) {
             return NextResponse.json({ error: 'Required fields missing' }, { status: 400 })
         }
 
-        const { data: product, error } = await supabase
-            .from('products')
-            .insert([{
-                name,
-                name_ar,
+        const product = await prisma.product.create({
+            data: {
+                sku,
+                nameEn,
+                nameAr,
                 description,
-                description_ar,
-                price,
-                stock: stock || 0,
-                category_id,
-                image_url,
-                is_featured: is_featured || false
-            }])
-            .select()
-            .single()
-
-        if (error) throw error
+                price: parseFloat(price),
+                discountPrice: discountPrice ? parseFloat(discountPrice) : null,
+                stock: parseInt(stock) || 0,
+                categoryId,
+                subcategoryId,
+                imageUrl,
+                isFeatured: isFeatured || false
+            }
+        })
 
         return NextResponse.json(product, { status: 201 })
     } catch (error: any) {

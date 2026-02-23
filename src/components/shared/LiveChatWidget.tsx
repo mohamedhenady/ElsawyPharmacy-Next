@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MessageCircle, X, Send, Phone, Close, Minimize2, Maximize2, User, Bot, Loader2 } from "lucide-react"
+import { MessageCircle, X, Send, Phone, Minimize2, Maximize2, User, Bot, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"

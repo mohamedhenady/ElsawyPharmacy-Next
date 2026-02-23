@@ -1,45 +1,46 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import prisma from '@/lib/prisma'
 
 // GET all categories
 export async function GET() {
-    if (!supabase) {
-        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
-    }
     try {
-        const { data: categories, error } = await supabase
-            .from('categories')
-            .select('*')
-            .eq('is_active', true)
-
-        if (error) throw error
+        const categories = await prisma.category.findMany({
+            where: {
+                isActive: true
+            },
+            include: {
+                subcategories: true
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
 
         return NextResponse.json(categories)
     } catch (error: any) {
+        console.error('Fetch Categories Error:', error)
         return NextResponse.json({ error: error.message || 'Failed to fetch categories' }, { status: 500 })
     }
 }
 
 // POST create a new category
 export async function POST(req: Request) {
-    if (!supabase) {
-        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
-    }
     try {
         const body = await req.json()
-        const { name, name_ar, slug } = body
+        const { nameEn, nameAr, slug, parentId } = body
 
-        if (!name || !name_ar || !slug) {
-            return NextResponse.json({ error: 'Name, Arabic Name, and Slug are required' }, { status: 400 })
+        if (!nameEn || !nameAr || !slug) {
+            return NextResponse.json({ error: 'Name (EN), Name (AR), and Slug are required' }, { status: 400 })
         }
 
-        const { data: category, error } = await supabase
-            .from('categories')
-            .insert([{ name, name_ar, slug }])
-            .select()
-            .single()
-
-        if (error) throw error
+        const category = await prisma.category.create({
+            data: {
+                nameEn,
+                nameAr,
+                slug,
+                parentId
+            }
+        })
 
         return NextResponse.json(category, { status: 201 })
     } catch (error: any) {

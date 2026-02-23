@@ -52,12 +52,31 @@ model Product {
   @@map("products")
 }
 
+model Profile {
+  id        String   @id @db.Uuid // Matches auth.users.id
+  fullName  String   @map("full_name")
+  phone     String?
+  role      String   @default("customer") // "customer" or "admin"
+  orders    Order[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("profiles")
+}
+
 model Order {
   id            String      @id @default(cuid())
   status        OrderStatus @default(PENDING)
-  paymentMethod String      @map("payment_method") // "cash" or "wallet"
+  paymentMethod String      @map("payment_method") // "cash", "wallet", "paymob"
+  paymentStatus String?     @map("payment_status") // "pending", "paid", "failed"
   receiptUrl    String?     @map("receipt_url")
   totalPrice    Float       @map("total_price")
+  shippingAddress Json?     @map("shipping_address") // {full_name, phone, address, city}
+  
+  userId        String?     @map("user_id") @db.Uuid
+  user          Profile?    @relation(fields: [userId], references: [id])
+  
+  paymobOrderId String?     @map("paymob_order_id")
+  
   items         OrderItem[]
   
   createdAt     DateTime    @default(now()) @map("created_at")
