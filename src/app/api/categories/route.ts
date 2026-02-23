@@ -3,6 +3,9 @@ import { supabase } from '@/lib/supabase'
 
 // GET all categories
 export async function GET() {
+    if (!supabase) {
+        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+    }
     try {
         const { data: categories, error } = await supabase
             .from('categories')
@@ -19,6 +22,9 @@ export async function GET() {
 
 // POST create a new category
 export async function POST(req: Request) {
+    if (!supabase) {
+        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+    }
     try {
         const body = await req.json()
         const { name, name_ar, slug } = body

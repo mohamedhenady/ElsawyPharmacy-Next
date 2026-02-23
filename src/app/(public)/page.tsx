@@ -28,12 +28,16 @@ export default function HomePage() {
                     fetch('/api/products?isFeatured=true'),
                     fetch('/api/categories')
                 ])
-                const [productsData, categoriesData] = await Promise.all([
-                    productsRes.json(),
-                    categoriesRes.json()
+
+                const data = await Promise.all([
+                    productsRes.ok && productsRes.headers.get('content-type')?.includes('application/json')
+                        ? productsRes.json() : Promise.resolve([]),
+                    categoriesRes.ok && categoriesRes.headers.get('content-type')?.includes('application/json')
+                        ? categoriesRes.json() : Promise.resolve([])
                 ])
-                setProducts(Array.isArray(productsData) ? productsData : [])
-                setCategories(Array.isArray(categoriesData) ? categoriesData : [])
+
+                setProducts(Array.isArray(data[0]) ? data[0] : [])
+                setCategories(Array.isArray(data[1]) ? data[1] : [])
             } catch (err) {
                 console.error('Failed to fetch data', err)
             }

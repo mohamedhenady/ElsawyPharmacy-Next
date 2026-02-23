@@ -3,6 +3,9 @@ import { supabase } from '@/lib/supabase'
 
 // GET all products with filtering
 export async function GET(req: Request) {
+    if (!supabase) {
+        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+    }
     try {
         const { searchParams } = new URL(req.url)
         const categoryId = searchParams.get('categoryId')
@@ -29,6 +32,9 @@ export async function GET(req: Request) {
 
 // POST create a new product
 export async function POST(req: Request) {
+    if (!supabase) {
+        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+    }
     try {
         const body = await req.json()
         const { name, name_ar, description, description_ar, price, stock, category_id, image_url, is_featured } = body
