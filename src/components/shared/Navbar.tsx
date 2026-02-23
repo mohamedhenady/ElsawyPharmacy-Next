@@ -44,7 +44,10 @@ export function Navbar() {
                         </span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <Link href="/admin" className="hover:underline">لوحة التحكم</Link>
+                        <Link href="/track" className="text-xs hover:underline">تتبع طلبك</Link>
+                        <Link href="/dashboard" className="text-xs hover:underline">حسابي</Link>
+                        <Link href="/compare" className="text-xs hover:underline">مقارنة</Link>
+                        <Link href="/admin" className="text-xs hover:underline">لوحة التحكم</Link>
                         <span>العربية | EN</span>
                     </div>
                 </div>

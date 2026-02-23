@@ -15,6 +15,10 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { useCartStore } from "@/store/useCartStore"
+import { FlashSaleSection } from "@/components/home/FlashSaleSection"
+import { RecentlyViewedSection } from "@/components/home/RecentlyViewedSection"
+import { LiveChatWidget } from "@/components/shared/LiveChatWidget"
+import { CompareFloatingBar } from "@/components/shared/CompareFloatingBar"
 
 export default function HomePage() {
     const [products, setProducts] = useState<any[]>([])
@@ -294,6 +298,11 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
+
+            <FlashSaleSection />
+            <RecentlyViewedSection />
+            <LiveChatWidget />
+            <CompareFloatingBar />
         </div>
     )
 }

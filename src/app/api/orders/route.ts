@@ -3,6 +3,9 @@ import { supabase } from '@/lib/supabase'
 
 // GET all orders (Admin) or user orders
 export async function GET(req: Request) {
+    if (!supabase) {
+        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+    }
     try {
         const { searchParams } = new URL(req.url)
         const userId = searchParams.get('userId')
@@ -25,6 +28,9 @@ export async function GET(req: Request) {
 
 // POST create a new order
 export async function POST(req: Request) {
+    if (!supabase) {
+        return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+    }
     try {
         const body = await req.json()
         const { user_id, total_price, payment_method, shipping_address, items } = body
