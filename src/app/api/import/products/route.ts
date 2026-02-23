@@ -115,13 +115,18 @@ export async function POST(req: Request) {
                 results.success++
             } catch (err: any) {
                 results.failed++
-                results.errors.push(err.message)
+                results.errors.push(`Row ${rows.indexOf(row) + 2}: ${err.message}`)
             }
         }
 
         return NextResponse.json({
             message: 'Import completed',
-            ...results,
+            summary: {
+                total: rows.length,
+                success: results.success,
+                failed: results.failed
+            },
+            errors: results.errors
         })
     } catch (error) {
         console.error('Import Error:', error)

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import {
@@ -11,7 +11,6 @@ import {
     Clock,
     MapPin,
     Phone,
-    ChevronRight,
     Home,
     ArrowRight
 } from "lucide-react"
@@ -39,7 +38,7 @@ const orderSteps: OrderStep[] = [
     { status: 'delivered', title: 'تم التوصيل', description: 'تم تسليم الطلب', completed: false, current: false },
 ]
 
-export default function TrackOrderPage() {
+function TrackOrderContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
     const orderId = searchParams.get('id')
@@ -86,7 +85,7 @@ export default function TrackOrderPage() {
                                 <Input
                                     placeholder="أدخل رقم الطلب (مثال: ORD-001)"
                                     value={searchOrderId}
-                                    onChange={(e) => setSearchOrderId(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchOrderId(e.target.value)}
                                     className="h-14 rounded-2xl text-lg font-bold"
                                 />
                                 <Button
@@ -125,7 +124,7 @@ export default function TrackOrderPage() {
                             <div className="p-8">
                                 <div className="relative">
                                     <div className="absolute top-0 right-8 bottom-0 w-0.5 bg-slate-200 hidden md:block" />
-                                    
+
                                     <div className="space-y-8">
                                         {orderSteps.map((step, idx) => (
                                             <div key={step.status} className="flex gap-6">
@@ -133,12 +132,12 @@ export default function TrackOrderPage() {
                                                     <div className={cn(
                                                         "w-16 h-16 rounded-full flex items-center justify-center",
                                                         step.completed ? "bg-green-500 text-white" :
-                                                        step.current ? "bg-primary text-white animate-pulse" :
-                                                        "bg-slate-100 text-slate-400"
+                                                            step.current ? "bg-primary text-white animate-pulse" :
+                                                                "bg-slate-100 text-slate-400"
                                                     )}>
                                                         {step.completed ? <CheckCircle className="w-8 h-8" /> :
-                                                         step.current ? <Truck className="w-8 h-8" /> :
-                                                         <Clock className="w-8 h-8" />}
+                                                            step.current ? <Truck className="w-8 h-8" /> :
+                                                                <Clock className="w-8 h-8" />}
                                                     </div>
                                                 </div>
                                                 <div className="flex-1 pt-2">
@@ -217,5 +216,17 @@ export default function TrackOrderPage() {
                 )}
             </div>
         </div>
+    )
+}
+
+export default function TrackOrderPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            </div>
+        }>
+            <TrackOrderContent />
+        </Suspense>
     )
 }

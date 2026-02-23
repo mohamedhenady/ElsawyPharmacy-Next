@@ -56,3 +56,21 @@ export async function GET(
         return NextResponse.json({ error: error.message || 'Failed to fetch order' }, { status: 500 })
     }
 }
+
+export async function DELETE(
+    req: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const { id } = await params
+
+        await prisma.order.delete({
+            where: { id }
+        })
+
+        return NextResponse.json({ message: 'Order deleted successfully' })
+    } catch (error: any) {
+        console.error('Order Deletion Error:', error)
+        return NextResponse.json({ error: error.message || 'Failed to delete order' }, { status: 500 })
+    }
+}
