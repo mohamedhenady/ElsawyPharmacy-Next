@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  nameEn      String    @map("name_en")
+  nameAr      String    @map("name_ar")
+  parentId    String?   @map("parent_id")
+  parent      Category? @relation("CategoryToSubcategory", fields: [parentId], references: [id])
+  subcategories Category[] @relation("CategoryToSubcategory")
+  
+  products    Product[] @relation("CategoryToProduct")
+  subProducts Product[] @relation("SubcategoryToProduct")
+
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@map("categories")
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  sku           String   @unique
+  nameEn        String   @map("name_en")
+  nameAr        String   @map("name_ar")
+  price         Float
+  discountPrice Float?   @map("discount_price")
+  imageUrl      String?  @map("image_url")
+  description   String?
+  stock         Int      @default(0)
+  isActive      Boolean  @default(true) @map("is_active")
+  isFeatured    Boolean  @default(false) @map("is_featured")
+  
+  categoryId    String   @map("category_id")
+  category      Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  
+  subcategoryId String?  @map("subcategory_id")
+  subcategory   Category? @relation("SubcategoryToProduct", fields: [subcategoryId], references: [id])
+  
+  orderItems    OrderItem[]
+
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("products")
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  status        OrderStatus @default(PENDING)
+  paymentMethod String      @map("payment_method") // "cash" or "wallet"
+  receiptUrl    String?     @map("receipt_url")
+  totalPrice    Float       @map("total_price")
+  items         OrderItem[]
+  
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String  @map("order_id")
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float // Price at the time of purchase
+
+  @@map("order_items")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+  DELIVERED
+}
