@@ -9,77 +9,78 @@ import Link from "next/link"
 
 export default function PrescriptionPage() {
     return (
-        <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col pb-24">
+        <div className="bg-[#f8faf9] dark:bg-[#0f1712] min-h-screen flex flex-col pb-28">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-4 flex items-center justify-between">
-                <Link href="/home" className="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-                    <ArrowRight className="w-6 h-6" />
+            <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-900 px-4 py-3 flex items-center justify-between">
+                <Link href="/home" className="bg-slate-50 dark:bg-slate-900 p-2.5 rounded-2xl text-slate-400 hover:text-[#1FAF5A] transition-colors">
+                    <ArrowRight className="w-5 h-5" />
                 </Link>
-                <h1 className="text-lg font-bold">تحميل الروشتة</h1>
-                <div className="size-10"></div>
+                <h1 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">طلب بروشتة</h1>
+                <div className="w-10"></div>
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 px-4 py-6 max-w-md mx-auto w-full">
+            <main className="flex-1 px-4 py-8 max-w-[440px] mx-auto w-full space-y-10">
                 {/* Illustration/Status Area */}
-                <div className="text-center mb-8">
+                <div className="text-center">
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        className="inline-flex items-center justify-center size-20 rounded-full bg-primary/10 mb-4"
+                        className="bg-[#1FAF5A] p-6 rounded-3xl shadow-xl shadow-emerald-500/20 inline-flex items-center justify-center mb-6"
                     >
-                        <FileText className="w-10 h-10 text-primary" />
+                        <FileText className="w-12 h-12 text-white" />
                     </motion.div>
-                    <h2 className="text-2xl font-bold mb-2">ارفع صورة الروشتة</h2>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm">سيقوم الصيدلي في صيدلية الصاوي بمراجعة طلبك فور إرساله وتجهيز الأدوية لك.</p>
+                    <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2">ارفع صورة الروشتة</h2>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm font-medium px-4">سيقوم فريقنا الصيدلي بمراجعة طلبك فوراً وتجهيزه لك بأعلى جودة.</p>
                 </div>
 
-                {/* Upload Options */}
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                    <button className="flex flex-col items-center gap-3 p-6 rounded-2xl border-2 border-dashed border-primary/30 bg-primary/5 hover:bg-primary/10 transition-all group active:scale-95">
-                        <div className="size-12 rounded-full bg-primary text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-primary/20">
-                            <Camera className="w-6 h-6" />
+                {/* Upload Options - Premium Design */}
+                <div className="grid grid-cols-2 gap-5">
+                    <button className="flex flex-col items-center gap-4 p-8 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:border-[#1FAF5A] transition-all group active:scale-[0.98]">
+                        <div className="bg-[#1FAF5A] p-4 rounded-2xl text-white shadow-lg shadow-emerald-500/20 group-hover:rotate-6 transition-transform">
+                            <Camera className="w-8 h-8" />
                         </div>
-                        <span className="font-bold text-sm">الكاميرا</span>
+                        <span className="font-black text-slate-700 dark:text-slate-300 text-sm">الكاميرا</span>
                     </button>
-                    <button className="flex flex-col items-center gap-3 p-6 rounded-2xl border-2 border-dashed border-secondary/30 bg-secondary/5 hover:bg-secondary/10 transition-all group active:scale-95">
-                        <div className="size-12 rounded-full bg-secondary text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-secondary/20">
-                            <ImageIcon className="w-6 h-6" />
+                    <button className="flex flex-col items-center gap-4 p-8 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:border-[#1C7ED6] transition-all group active:scale-[0.98]">
+                        <div className="bg-[#1C7ED6] p-4 rounded-2xl text-white shadow-lg shadow-blue-500/20 group-hover:-rotate-6 transition-transform">
+                            <ImageIcon className="w-8 h-8" />
                         </div>
-                        <span className="font-bold text-sm">المعرض</span>
+                        <span className="font-black text-slate-700 dark:text-slate-300 text-sm">المعرض</span>
                     </button>
                 </div>
 
-                {/* Notes Section */}
-                <div className="space-y-3 mb-8">
-                    <label className="flex items-center gap-2 text-sm font-bold px-1">
-                        <FileEdit className="w-4 h-4 text-primary" />
-                        ملاحظات إضافية (اختياري)
+                {/* Notes Section - Premium Style */}
+                <div className="space-y-4">
+                    <label className="text-[12px] font-black text-slate-400 dark:text-slate-500 mr-2 uppercase tracking-wider flex items-center gap-2">
+                        <FileEdit className="w-3 h-3" />
+                        تعليمات إضافية
                     </label>
-                    <Textarea
-                        className="w-full min-h-[120px] rounded-2xl border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 focus-visible:ring-primary p-4 text-sm"
-                        placeholder="أضف أي تعليمات خاصة للصيدلي هنا، مثل الحساسية من أدوية معينة أو تفضيلات العلامة التجارية..."
-                    />
+                    <div className="relative group">
+                        <textarea
+                            className="w-full min-h-[140px] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 focus:border-[#1FAF5A]/20 rounded-[1.5rem] p-5 text-sm font-bold outline-none transition-all placeholder:text-slate-300 dark:placeholder:text-slate-600"
+                            placeholder="اكتب هنا أي ملاحظات أو تفضيلات للعلامة التجارية..."
+                        />
+                    </div>
                 </div>
 
-                {/* Info Card */}
+                {/* Info Card - Premium Glass */}
                 <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-secondary/10 p-4 rounded-xl flex gap-3 items-start mb-8 border border-secondary/20"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="bg-blue-50/50 dark:bg-blue-900/10 p-5 rounded-2xl flex gap-4 items-start border border-blue-100/50 dark:border-blue-800/20"
                 >
-                    <Info className="w-5 h-5 text-secondary shrink-0" />
-                    <p className="text-[11px] leading-relaxed text-secondary-950 dark:text-secondary-100 font-medium">
-                        يرجى التأكد من أن الصورة واضحة وتظهر جميع بيانات الروشتة (اسم المريض، اسم الطبيب، وتاريخ الروشتة).
+                    <Info className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                    <p className="text-[11px] leading-relaxed text-blue-800 dark:text-blue-300 font-bold">
+                        يرجى التأكد من وضوح بيانات الروشتة (اسم المريض، الطبيب والباركود) لسرعة التنفيذ.
                     </p>
                 </motion.div>
 
-                {/* Submit Button */}
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white font-black py-7 rounded-full shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mb-6 transition-all text-lg group">
-                    <span>إرسال للصيدلية</span>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </Button>
+                {/* Submit Button - Premium Flow */}
+                <button className="w-full bg-[#1FAF5A] hover:bg-[#0d5c2f] text-white font-black py-5 rounded-3xl shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-3 transition-all active:scale-[0.98] group">
+                    <span className="text-lg">إرسال للصيدلي</span>
+                    <Send className="w-5 h-5 group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform" />
+                </button>
             </main>
 
             <MobileBottomNav />

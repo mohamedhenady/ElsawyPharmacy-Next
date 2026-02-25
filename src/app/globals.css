@@ -1,43 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --color-primary: #1FAF5A;
-  --color-secondary: #1C7ED6;
-  --color-background-light: #f6f8f7;
-  --color-background-dark: #122018;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #3b82f6;
+  --color-background-light: #f8faf9;
+  --color-background-dark: #0f1712;
 
-  --color-border: var(--color-primary);
-  --color-input: var(--color-primary);
-  --color-ring: var(--color-primary);
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #1FAF5A;
 
+  --font-sans: "Inter", "Manrope", "Noto Sans Arabic", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Manrope", "Noto Sans Arabic", sans-serif;
 
-  --radius-default: 1rem;
-  --radius-lg: 2rem;
-  --radius-xl: 3rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
 
-  /* Standard Tailwind variables mapped to our custom ones if needed */
-  --background: var(--color-background-light);
-  --foreground: #1a1a1a;
+  --shadow-premium: 0 10px 15px -3px rgba(31, 175, 90, 0.1), 0 4px 6px -4px rgba(31, 175, 90, 0.1);
 }
 
 @layer base {
+  :root {
+    --background: #f8faf9;
+    --foreground: #0f172a;
+    --primary: #1FAF5A;
+  }
+
+  .dark {
+    --background: #0f1712;
+    --foreground: #f8faf9;
+  }
+
   body {
-    @apply bg-background text-foreground font-display antialiased overflow-x-hidden select-none;
-    -webkit-tap-highlight-color: transparent;
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply font-sans antialiased overflow-x-hidden;
   }
 }
 
-/* Glassmorphism Utilities */
-.glass-card {
-  @apply bg-white/10 backdrop-blur-md border border-white/20;
+@layer utilities {
+  .glass-effect {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-slate-800/20;
+  }
+
+  .mobile-container {
+    @apply mx-auto min-h-screen max-w-[440px] bg-white dark:bg-slate-950 shadow-2xl relative overflow-hidden;
+  }
 }
 
-.mobile-container {
-  @apply mx-auto min-h-screen max-w-[430px] bg-background shadow-2xl relative overflow-hidden;
-}
-
-/* Hide scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

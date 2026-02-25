@@ -13,26 +13,34 @@ const CART_ITEMS = [
 ]
 
 export default function CartPage() {
-    const [items] = useState(CART_ITEMS)
+    const [items, setItems] = useState(CART_ITEMS)
 
-    const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    const delivery = 5.00
-    const total = subtotal + delivery
+    const updateQuantity = (id: number, delta: number) => {
+        setItems(prev => prev.map(item =>
+            item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+        ))
+    }
+
+    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    const shipping = 10.00
+    const total = subtotal + shipping
 
     return (
-        <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col pb-40">
+        <div className="bg-[#f8faf9] dark:bg-[#0f1712] min-h-screen flex flex-col pb-28">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-4 flex items-center justify-between">
-                <Link href="/home" className="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-                    <ArrowRight className="w-6 h-6" />
-                </Link>
-                <h1 className="text-lg font-bold">عربة التسوق</h1>
-                <div className="size-10 flex items-center justify-center text-slate-400">
+            <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f1712]/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-900 px-6 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                    <Link href="/home" className="flex items-center justify-center size-10 rounded-2xl bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:scale-105 active:scale-95 transition-all">
+                        <ArrowRight className="w-5 h-5" />
+                    </Link>
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">سلة التسوق</h1>
+                </div>
+                <div className="flex items-center justify-center size-10 rounded-2xl bg-primary/10 text-primary">
                     <ShoppingBag className="w-5 h-5" />
                 </div>
             </header>
 
-            <main className="flex-1 px-4 py-6 space-y-6">
+            <div className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
                 {/* Cart Items */}
                 <div className="space-y-4">
                     <AnimatePresence mode="popLayout">
@@ -40,74 +48,76 @@ export default function CartPage() {
                             <motion.div
                                 key={item.id}
                                 layout
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                className="bg-white dark:bg-slate-900 p-3 rounded-2xl flex gap-4 shadow-sm border border-slate-100 dark:border-slate-800"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                className="group relative bg-white dark:bg-slate-900/50 backdrop-blur-sm p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm"
                             >
-                                <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-xl shrink-0 flex items-center justify-center overflow-hidden">
-                                    <div className="w-12 h-12 bg-slate-200 rounded animate-pulse" />
-                                </div>
-                                <div className="flex-1 flex flex-col justify-between py-1">
-                                    <h3 className="font-bold text-sm line-clamp-1">{item.name}</h3>
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-primary font-black">{item.price} ج.م</span>
-                                        <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded-full border border-slate-100 dark:border-slate-700">
-                                            <button className="p-1 text-slate-400 hover:text-primary transition-colors">
-                                                <Minus className="w-4 h-4" />
-                                            </button>
-                                            <span className="text-xs font-bold w-4 text-center">{item.quantity}</span>
-                                            <button className="p-1 text-slate-400 hover:text-primary transition-colors">
-                                                <Plus className="w-4 h-4" />
-                                            </button>
+                                <div className="flex gap-4">
+                                    <div className="size-24 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+                                        <div className="text-slate-300">Image</div>
+                                    </div>
+
+                                    <div className="flex-1 flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex items-start justify-between">
+                                                <h3 className="font-bold text-slate-800 dark:text-slate-200 line-clamp-1">{item.name}</h3>
+                                                <button className="text-slate-400 hover:text-red-500 transition-colors p-1">
+                                                    <Trash2 className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                            <p className="text-sm text-slate-500 mt-0.5">30 قرص</p>
+                                        </div>
+
+                                        <div className="flex items-end justify-between">
+                                            <span className="text-lg font-bold text-primary">{item.price} ج.م</span>
+
+                                            <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 rounded-xl p-1 border border-slate-100 dark:border-slate-700">
+                                                <button
+                                                    onClick={() => updateQuantity(item.id, -1)}
+                                                    className="size-8 flex items-center justify-center rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors"
+                                                >
+                                                    <Minus className="w-4 h-4" />
+                                                </button>
+                                                <span className="w-8 text-center font-bold text-sm">{item.quantity}</span>
+                                                <button
+                                                    onClick={() => updateQuantity(item.id, 1)}
+                                                    className="size-8 flex items-center justify-center rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors"
+                                                >
+                                                    <Plus className="w-4 h-4" />
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button className="self-center p-2 text-rose-500 bg-rose-50 dark:bg-rose-500/10 rounded-xl">
-                                    <Trash2 className="w-4 h-4" />
-                                </button>
                             </motion.div>
                         ))}
                     </AnimatePresence>
                 </div>
-
-                {/* Delivery Info */}
-                <div className="bg-primary/5 rounded-2xl p-4 border border-primary/10">
-                    <div className="flex items-center justify-between mb-3 px-1">
-                        <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-bold">عنوان التوصيل</span>
-                        </div>
-                        <button className="text-xs text-primary font-bold">تغيير</button>
-                    </div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pr-6">
-                        شارع الصاوي، متفرع من شارع المحطة، بجوار مسجد الإيمان، الإسماعيلية.
-                    </p>
-                </div>
-            </main>
+            </div>
 
             {/* Checkout Summary Footer */}
-            <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-4 z-50">
-                <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-4">
-                    <div className="space-y-2">
-                        <div className="flex justify-between text-sm text-slate-500">
-                            <span>المجموع الفرعي</span>
-                            <span className="font-bold text-slate-900 dark:text-slate-100">{subtotal.toFixed(2)} ج.م</span>
+            <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-[440px] px-4 z-[90]">
+                <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-[2.5rem] p-8 shadow-2xl shadow-emerald-900/10 border border-slate-100 dark:border-slate-800 space-y-6">
+                    <div className="space-y-3">
+                        <div className="flex justify-between text-sm">
+                            <span className="text-slate-400 font-bold">المجموع الفرعي</span>
+                            <span className="font-black text-slate-900 dark:text-slate-100">{subtotal.toFixed(2)} ج.م</span>
                         </div>
-                        <div className="flex justify-between text-sm text-slate-500">
-                            <span>التوصيل</span>
-                            <span className="font-bold text-slate-900 dark:text-slate-100">{delivery.toFixed(2)} ج.م</span>
+                        <div className="flex justify-between text-sm">
+                            <span className="text-slate-400 font-bold">رسوم التوصيل</span>
+                            <span className="font-black text-emerald-500">+{shipping.toFixed(2)} ج.م</span>
                         </div>
-                        <div className="h-px bg-slate-100 dark:bg-slate-800 my-2" />
-                        <div className="flex justify-between text-lg font-black">
-                            <span>الإجمالي</span>
-                            <span className="text-primary">{total.toFixed(2)} ج.م</span>
+                        <div className="h-px bg-slate-50 dark:bg-slate-800 my-4" />
+                        <div className="flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <span className="text-lg font-black text-slate-900 dark:text-white">الإجمالي النهائي</span>
+                            <span className="text-2xl font-black text-[#1FAF5A]">{total.toFixed(2)} <span className="text-xs">ج.م</span></span>
                         </div>
                     </div>
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white font-black py-7 rounded-2xl shadow-lg shadow-primary/20 text-lg flex items-center justify-center gap-3">
-                        <CreditCard className="w-6 h-6" />
-                        <span>إتمام الطلب</span>
-                    </Button>
+                    <button className="w-full bg-[#1FAF5A] hover:bg-[#0d5c2f] text-white font-black py-5 rounded-[1.5rem] shadow-xl shadow-emerald-500/30 text-lg flex items-center justify-center gap-3 transition-all active:scale-[0.98] group">
+                        <CreditCard className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+                        <span>إتمام عملية الدفع</span>
+                    </button>
                 </div>
             </div>
 

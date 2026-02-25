@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Package, Tag, Clock, CheckCircle, Gift, Settings, ArrowRight } from "lucide-react"
 import { MobileBottomNav } from "@/components/mobile/BottomNav"
 import { cn } from "@/lib/utils"
@@ -18,139 +18,125 @@ export default function NotificationsPage() {
     const [activeTab, setActiveTab] = useState("all")
 
     return (
-        <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col pb-24">
+        <div className="bg-[#f8faf9] dark:bg-[#0f1712] min-h-screen flex flex-col pb-28">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <Link href="/home" className="p-2 hover:bg-primary/10 rounded-full transition-colors">
-                        <ArrowRight className="w-6 h-6" />
+            <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f1712]/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-900 px-6 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                    <Link href="/home" className="flex items-center justify-center size-10 rounded-2xl bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:scale-105 active:scale-95 transition-all">
+                        <ArrowRight className="w-5 h-5" />
                     </Link>
-                    <h1 className="text-xl font-bold tracking-tight">الإشعارات</h1>
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">التنبيهات</h1>
                 </div>
-                <button className="p-2 hover:bg-primary/10 rounded-full transition-colors">
+                <button className="flex items-center justify-center size-10 rounded-2xl bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
                     <Settings className="w-5 h-5" />
                 </button>
             </header>
 
-            {/* Tabs Navigation */}
-            <nav className="bg-white dark:bg-background-dark border-b border-primary/10 sticky top-[69px] z-40">
-                <div className="flex px-4 overflow-x-auto no-scrollbar">
+            {/* Tabs */}
+            <div className="mt-4 px-4 overflow-x-auto no-scrollbar">
+                <div className="flex gap-2 min-w-max p-1 bg-slate-100 dark:bg-slate-900 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
                     {TABS.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={cn(
-                                "flex-1 py-4 text-center font-bold text-sm border-b-[3px] transition-all",
+                                "px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300",
                                 activeTab === tab.id
-                                    ? "border-primary text-primary"
-                                    : "border-transparent text-slate-500 dark:text-slate-400 hover:text-primary"
+                                    ? "bg-white dark:bg-slate-800 text-[#1FAF5A] shadow-sm ring-1 ring-slate-200 dark:ring-slate-700"
+                                    : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                             )}
                         >
                             {tab.label}
                         </button>
                     ))}
                 </div>
-            </nav>
+            </div>
 
-            {/* Main Content */}
-            <main className="p-4 space-y-6">
-                {/* Group: Today */}
-                <section>
-                    <h2 className="text-lg font-bold mb-4 px-1">اليوم</h2>
-                    <div className="space-y-3">
-                        {/* Order Notification */}
+            {/* Notifications List */}
+            <div className="flex-1 px-4 py-4 space-y-4 overflow-y-auto">
+                <AnimatePresence mode="popLayout">
+                    {NOTIFICATIONS.map((notif, index) => (
                         <motion.div
-                            initial={{ opacity: 0, y: 10 }}
+                            key={notif.id}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white dark:bg-slate-800/50 p-4 rounded-2xl flex items-start gap-4 shadow-sm border border-primary/5 active:scale-95 transition-transform"
+                            transition={{ delay: index * 0.05 }}
+                            className={cn(
+                                "group relative overflow-hidden bg-white dark:bg-slate-900/50 backdrop-blur-sm p-4 rounded-3xl border transition-all duration-300",
+                                notif.unread
+                                    ? "border-primary/20 shadow-lg shadow-primary/5"
+                                    : "border-slate-100 dark:border-slate-900 shadow-sm"
+                            )}
                         >
-                            <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                                <Package className="w-6 h-6 text-primary" />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex justify-between items-start">
-                                    <h3 className="font-bold text-sm">تم تأكيد طلبك رقم #12345</h3>
-                                    <span className="size-2 rounded-full bg-primary mt-1.5 animate-pulse"></span>
+                            <div className="flex gap-4">
+                                <div className={cn(
+                                    "flex-shrink-0 size-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110",
+                                    notif.type === "order" ? "bg-blue-50 dark:bg-blue-500/10 text-blue-500" :
+                                        notif.type === "offer" ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-500" :
+                                            "bg-amber-50 dark:bg-amber-500/10 text-amber-500"
+                                )}>
+                                    {notif.type === "order" ? <Package className="w-6 h-6" /> :
+                                        notif.type === "offer" ? <Tag className="w-6 h-6" /> :
+                                            <Clock className="w-6 h-6" />}
                                 </div>
-                                <p className="text-slate-600 dark:text-slate-400 text-xs mt-1 leading-relaxed">طلبك الآن قيد التحضير وسيتم توصيله قريباً.</p>
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 block font-medium">منذ ٥ دقائق</span>
+
+                                <div className="flex-1 space-y-1">
+                                    <div className="flex items-center justify-between">
+                                        <h3 className={cn("font-bold text-sm", notif.unread ? "text-slate-900 dark:text-white" : "text-slate-600 dark:text-slate-400")}>
+                                            {notif.title}
+                                        </h3>
+                                        <span className="text-[10px] font-medium text-slate-400 uppercase tracking-tighter">{notif.time}</span>
+                                    </div>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed italic">
+                                        {notif.description}
+                                    </p>
+                                </div>
+
+                                {notif.unread && (
+                                    <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(23,163,74,0.5)]" />
+                                )}
                             </div>
                         </motion.div>
-
-                        {/* Offer Notification */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-white dark:bg-slate-800/50 p-4 rounded-2xl flex items-start gap-4 shadow-sm border border-secondary/5 active:scale-95 transition-transform"
-                        >
-                            <div className="size-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-                                <Tag className="w-6 h-6 text-secondary" />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex justify-between items-start">
-                                    <h3 className="font-bold text-sm">خصم خاص بمناسبة نهاية الأسبوع!</h3>
-                                    <span className="size-2 rounded-full bg-primary mt-1.5 animate-pulse"></span>
-                                </div>
-                                <p className="text-slate-600 dark:text-slate-400 text-xs mt-1 leading-relaxed">احصل على خصم ٢٥٪ على جميع منتجات العناية بالبشرة باستخدام الكود: WEEKEND25</p>
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 block font-medium">منذ ساعتين</span>
-                            </div>
-                        </motion.div>
-
-                        {/* Reminder Notification */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="bg-white dark:bg-slate-800/50 p-4 rounded-2xl flex items-start gap-4 shadow-sm border border-amber-500/5 active:scale-95 transition-transform"
-                        >
-                            <div className="size-12 rounded-xl bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center shrink-0">
-                                <Clock className="w-6 h-6 text-amber-600" />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex justify-between items-start">
-                                    <h3 className="font-bold text-sm">تذكير بموعد الدواء</h3>
-                                    <span className="size-2 rounded-full bg-primary mt-1.5 animate-pulse"></span>
-                                </div>
-                                <p className="text-slate-600 dark:text-slate-400 text-xs mt-1 leading-relaxed">حان الآن موعد جرعة فيتامين C اليومية.</p>
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 block font-medium">منذ ٣ ساعات</span>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-
-                {/* Group: Yesterday */}
-                <section>
-                    <h2 className="text-lg font-bold mb-4 px-1">أمس</h2>
-                    <div className="space-y-3 opacity-80">
-                        {/* Order Notification (Read) */}
-                        <div className="bg-white/50 dark:bg-slate-800/30 p-4 rounded-2xl flex items-start gap-4 shadow-sm border border-transparent">
-                            <div className="size-12 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0">
-                                <CheckCircle className="w-6 h-6 text-slate-400" />
-                            </div>
-                            <div className="flex-1">
-                                <h3 className="font-bold text-sm text-slate-700 dark:text-slate-300">تم توصيل طلبك بنجاح</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-xs mt-1 leading-relaxed">نأمل أن تكون راضياً عن تجربتك معنا. لا تنسى تقييم الخدمة!</p>
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 block">أمس، ٠٤:٣٠ م</span>
-                            </div>
-                        </div>
-
-                        {/* Gift Notification (Read) */}
-                        <div className="bg-white/50 dark:bg-slate-800/30 p-4 rounded-2xl flex items-start gap-4 shadow-sm border border-transparent">
-                            <div className="size-12 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0">
-                                <Gift className="w-6 h-6 text-slate-400" />
-                            </div>
-                            <div className="flex-1">
-                                <h3 className="font-bold text-sm text-slate-700 dark:text-slate-300">هدية في انتظارك!</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-xs mt-1 leading-relaxed">لقد ربحت كوبون خصم ١٠٪ كعربون شكر على ولائك لصيدلية الصاوي.</p>
-                                <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 block">أمس، ١٠:١٥ ص</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
+                    ))}
+                </AnimatePresence>
+            </div>
 
             <MobileBottomNav />
         </div>
     )
 }
+
+const NOTIFICATIONS = [
+    {
+        id: 1,
+        type: "order",
+        title: "تم استلام الطلب #5432",
+        description: "جارٍ العمل على تجهيز طلبك وسيتم تسليمه قريباً.",
+        time: "منذ دقيقتين",
+        unread: true,
+    },
+    {
+        id: 2,
+        type: "offer",
+        title: "عرض لفترة محدودة! ⚡",
+        description: "خصم 20% على جميع منتجات العناية بالبشرة اليوم فقط.",
+        time: "منذ ساعة",
+        unread: true,
+    },
+    {
+        id: 3,
+        type: "reminder",
+        title: "تذكير بموعد الدواء",
+        description: "حان موعد تناول الفيتامينات اليومي.",
+        time: "منذ 3 ساعات",
+        unread: false,
+    },
+    {
+        id: 4,
+        type: "order",
+        title: "تم توصيل الطلب بنجاح",
+        description: "شكراً لثقتك بنا! نأمل أن تكون تجربتك متميزة.",
+        time: "أمس",
+        unread: false,
+    },
+]

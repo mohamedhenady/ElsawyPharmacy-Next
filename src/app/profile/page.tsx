@@ -12,107 +12,103 @@ import {
     LogOut,
     Camera,
     Settings,
-    ArrowRight
+    ArrowRight,
+    ChevronLeft
 } from "lucide-react"
 import { MobileBottomNav } from "@/components/mobile/BottomNav"
-
-const MENU_ITEMS = [
-    { id: "orders", icon: History, label: "طلباتي السابقة", color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-500/10" },
-    { id: "addresses", icon: MapPin, label: "عناوين التوصيل", color: "text-emerald-500", bg: "bg-emerald-50 dark:bg-emerald-500/10" },
-    { id: "payments", icon: CreditCard, label: "وسائل الدفع", color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-500/10" },
-    { id: "notifications", icon: Bell, label: "إعدادات الإشعارات", color: "text-amber-500", bg: "bg-amber-50 dark:bg-amber-500/10" },
-    { id: "privacy", icon: ShieldCheck, label: "الخصوصية والأمان", color: "text-indigo-500", bg: "bg-indigo-50 dark:bg-indigo-500/10" },
-    { id: "support", icon: HelpCircle, label: "الدعم والمساعدة", color: "text-rose-500", bg: "bg-rose-50 dark:bg-rose-500/10" },
-]
+import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { Button } from "@/components/ui/button" // Assuming Button component path
 
 export default function ProfilePage() {
     return (
-        <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col pb-24 font-display">
+        <div className="bg-[#f8faf9] dark:bg-[#0f1712] min-h-screen flex flex-col pb-28">
             {/* Header */}
-            <header className="px-5 pt-8 pb-10 bg-gradient-to-b from-primary/20 to-transparent relative overflow-hidden">
-                <div className="flex items-center justify-between mb-6 relative z-10">
-                    <h1 className="text-2xl font-black">حسابي</h1>
-                    <button className="p-2 bg-white dark:bg-slate-900 rounded-full shadow-sm">
-                        <Settings className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-                    </button>
+            <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f1712]/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-900 px-6 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                    <Link href="/home" className="flex items-center justify-center size-10 rounded-2xl bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:scale-105 active:scale-95 transition-all">
+                        <ArrowRight className="w-5 h-5" />
+                    </Link>
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">الملف الشخصي</h1>
                 </div>
+                <button className="flex items-center justify-center size-10 rounded-2xl bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
+                    <Settings className="w-5 h-5" />
+                </button>
+            </header>
 
-                {/* Profile Card */}
-                <div className="flex items-center gap-5 relative z-10">
-                    <div className="relative">
-                        <div className="size-20 rounded-3xl bg-white p-1 shadow-xl border border-white dark:border-slate-800">
-                            <div className="size-full rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden">
-                                <User className="w-10 h-10 text-primary" />
+            <div className="flex-1 px-4 py-8 space-y-8 overflow-y-auto">
+                {/* Profile Info */}
+                <div className="flex flex-col items-center gap-4">
+                    <div className="relative group">
+                        <div className="size-28 rounded-[2.5rem] bg-gradient-to-tr from-primary/20 via-primary to-primary/40 p-1">
+                            <div className="size-full rounded-[2.2rem] bg-white dark:bg-slate-900 flex items-center justify-center overflow-hidden border-4 border-white dark:border-slate-800">
+                                <User className="size-12 text-slate-300" />
                             </div>
                         </div>
-                        <button className="absolute -bottom-1 -right-1 size-8 rounded-full bg-secondary text-white flex items-center justify-center shadow-lg border-2 border-white dark:border-slate-900 active:scale-90 transition-transform">
+                        <button className="absolute bottom-1 left-1 size-9 rounded-2xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center shadow-xl border-2 border-white dark:border-slate-900 group-hover:scale-110 transition-transform">
                             <Camera className="w-4 h-4" />
                         </button>
                     </div>
-                    <div>
-                        <h2 className="text-lg font-bold">محمد هنيدي</h2>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 font-bold tracking-wide">+20 100 123 4567</p>
-                        <div className="flex gap-2 mt-2">
-                            <span className="bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full">عميل مميز</span>
-                            <span className="bg-secondary/10 text-secondary text-[10px] font-black px-2 py-0.5 rounded-full">١٤٠٠ نقطة</span>
-                        </div>
+                    <div className="text-center">
+                        <h2 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">أحمد محمد</h2>
+                        <p className="text-slate-500 font-medium">ahmed@example.com</p>
                     </div>
                 </div>
 
-                {/* Abstract Shapes */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-                <div className="absolute top-0 left-0 w-20 h-20 bg-secondary/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
-            </header>
-
-            {/* Main Content */}
-            <main className="flex-1 px-5 -mt-4 relative z-20">
-                <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-xl shadow-primary/5 p-6 border border-slate-100 dark:border-slate-800/50">
-                    {/* Stats */}
-                    <div className="grid grid-cols-3 gap-2 mb-8 border-b border-slate-50 dark:border-slate-800/50 pb-8">
-                        <div className="text-center">
-                            <p className="text-xs text-slate-400 mb-1 font-medium">الطلبات</p>
-                            <p className="text-lg font-black text-primary">١٢</p>
-                        </div>
-                        <div className="text-center border-x border-slate-100 dark:border-slate-800">
-                            <p className="text-xs text-slate-400 mb-1 font-medium">الروشتات</p>
-                            <p className="text-lg font-black text-secondary">٥</p>
-                        </div>
-                        <div className="text-center">
-                            <p className="text-xs text-slate-400 mb-1 font-medium">المفضلة</p>
-                            <p className="text-lg font-black text-amber-500">٢٤</p>
-                        </div>
+                {/* Quick Stats */}
+                <div className="grid grid-cols-3 gap-3">
+                    <div className="bg-white dark:bg-slate-900/50 backdrop-blur-sm p-4 rounded-3xl border border-slate-100 dark:border-slate-800 text-center shadow-sm">
+                        <p className="text-xl font-bold text-primary">12</p>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">طلب</p>
                     </div>
+                    <div className="bg-white dark:bg-slate-900/50 backdrop-blur-sm p-4 rounded-3xl border border-slate-100 dark:border-slate-800 text-center shadow-sm">
+                        <p className="text-xl font-bold text-emerald-500">250</p>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">نقطة</p>
+                    </div>
+                    <div className="bg-white dark:bg-slate-900/50 backdrop-blur-sm p-4 rounded-3xl border border-slate-100 dark:border-slate-800 text-center shadow-sm">
+                        <p className="text-xl font-bold text-blue-500">4</p>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">خدمات</p>
+                    </div>
+                </div>
 
-                    {/* Menu Items */}
-                    <div className="space-y-2">
-                        {MENU_ITEMS.map((item, index) => (
-                            <motion.button
-                                key={item.id}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                className="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <div className={`size-11 rounded-xl ${item.bg} ${item.color} flex items-center justify-center transition-transform group-hover:scale-110`}>
-                                        <item.icon className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-bold text-sm">{item.label}</span>
+                {/* Menu Items */}
+                <div className="space-y-3">
+                    {MENU_ITEMS.map((item, index) => (
+                        <motion.button
+                            key={item.id}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05 }}
+                            className="w-full group bg-white dark:bg-slate-900/50 backdrop-blur-sm p-4 rounded-3xl border border-slate-100 dark:border-slate-800 flex items-center justify-between shadow-sm hover:scale-[1.01] transition-all"
+                        >
+                            <div className="flex items-center gap-4">
+                                <div className={cn("size-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm", item.bg)}>
+                                    <item.icon className={cn("w-6 h-6", item.color)} />
                                 </div>
-                                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-primary transition-colors" />
-                            </motion.button>
-                        ))}
-                    </div>
-
-                    {/* Log Out */}
-                    <button className="w-full flex items-center gap-4 p-4 mt-6 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-2xl transition-all font-bold text-sm">
-                        <LogOut className="w-5 h-5" />
-                        <span>تسجيل الخروج</span>
-                    </button>
+                                <span className="font-bold text-slate-700 dark:text-slate-200 text-sm">{item.label}</span>
+                            </div>
+                            <ChevronLeft className="w-5 h-5 text-slate-300 group-hover:translate-x-[-4px] transition-transform" />
+                        </motion.button>
+                    ))}
                 </div>
-            </main>
+
+                {/* Logout Button */}
+                <Button variant="ghost" className="w-full h-16 rounded-3xl text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 font-bold text-lg border-2 border-dashed border-slate-200 dark:border-slate-800 flex items-center justify-center gap-3">
+                    <LogOut className="w-6 h-6" />
+                    تسجيل الخروج
+                </Button>
+            </div>
 
             <MobileBottomNav />
         </div>
     )
 }
+
+const MENU_ITEMS = [
+    { id: "orders", icon: History, label: "طلباتي السابقة", color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-500/10" },
+    { id: "address", icon: MapPin, label: "عناوين التوصيل", color: "text-emerald-500", bg: "bg-emerald-50 dark:bg-emerald-500/10" },
+    { id: "payment", icon: CreditCard, label: "وسائل الدفع", color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-500/10" },
+    { id: "notifs", icon: Bell, label: "تفضيلات التنبيهات", color: "text-amber-500", bg: "bg-amber-50 dark:bg-amber-500/10" },
+    { id: "security", icon: ShieldCheck, label: "الأمان والخصوصية", color: "text-indigo-500", bg: "bg-indigo-50 dark:bg-indigo-500/10" },
+    { id: "help", icon: HelpCircle, label: "مركز المساعدة", color: "text-slate-600 dark:text-slate-400", bg: "bg-slate-50 dark:bg-slate-800" },
+]
