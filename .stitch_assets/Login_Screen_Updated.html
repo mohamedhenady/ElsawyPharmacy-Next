@@ -1,51 +1,106 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contribution.usercontent.com - Coming Soon</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1FAF5A",
+                        "primary-blue": "#1C7ED6",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122018",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }</script>
+<style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            font-family: 'Manrope', sans-serif;
         }
-        .container {
-            background: white;
-            border-radius: 12px;
-            padding: 60px 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 600px;
-        }
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            word-break: break-word;
-        }
-        p {
-            color: #666;
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-        .emoji {
-            font-size: 4em;
-            margin-bottom: 20px;
+        .soft-shadow {
+            box-shadow: 0 4px 20px -2px rgba(31, 173, 90, 0.08);
         }
     </style>
+<title>Login - Elsawy Pharmacy</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <div class="emoji">🚀</div>
-        <h1>contribution.usercontent.com</h1>
-        <p>This domain is coming soon.</p>
-    </div>
-</body>
-</html>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4">
+<div class="w-full max-w-[440px] bg-white dark:bg-slate-900 rounded-xl soft-shadow overflow-hidden p-8">
+<!-- Header / Logo Section -->
+<div class="flex flex-col items-center mb-10">
+<div class="w-24 h-24 mb-6 flex items-center justify-center rounded-full bg-primary/10">
+<img alt="Elsawy Pharmacy Logo" class="w-16 h-16 object-contain" data-alt="Elsawy Pharmacy medical green cross logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXZep-qxochEhDHg38SDRZR6XVk27rOtqFzqj6qiIlAtij1RunDvq4mr3eJI3Pbs3QUEbXtO-pso_vmHNiW2Cbni6GUNGXh0KxWiQbxTMMCTHyjE5YKTDb38uHAJxODvLjH8B-bf2vwaN3gVbSFyjlLKEHpj_qGDQS9_eM7FS2u4FEqcYGV3t2UTNeA-ZMmYg58cv00y-mJyfDPHzOHv1uh9w5rmqE7XVjouDveaw_H-nfls7vQw6OVV7ZJQkJF_A304UcnQ7q6Ku9"/>
+</div>
+<h1 class="text-2xl font-extrabold text-slate-900 dark:text-slate-100 text-center">Welcome Back</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-2 text-center">Login to your Elsawy Pharmacy account</p>
+</div>
+<!-- Form Section -->
+<form class="space-y-5" onsubmit="return false;">
+<!-- Phone Field -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1">Phone Number</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary-blue">
+                        call
+                    </span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="01x xxxx xxxx" type="tel"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center px-1">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Password</label>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary-blue">
+                        lock
+                    </span>
+<input class="w-full pl-12 pr-12 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<div class="flex justify-end mt-1">
+<a class="text-sm font-medium text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+</div>
+<!-- Login Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-all soft-shadow mt-4" style="background-color: #1FAF5A;">
+                Login
+            </button>
+<!-- Register Link -->
+<div class="pt-6 text-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm">
+                    Don't have an account? 
+                    <a class="text-primary font-bold hover:underline" href="#">Register</a>
+</p>
+</div>
+</form>
+<!-- Footer Decoration -->
+<div class="mt-10 flex justify-center gap-2">
+<div class="h-1 w-8 rounded-full bg-primary/20"></div>
+<div class="h-1 w-2 rounded-full bg-primary/10"></div>
+<div class="h-1 w-2 rounded-full bg-primary/10"></div>
+</div>
+</div>
+</body></html>

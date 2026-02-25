@@ -1,51 +1,243 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contribution.usercontent.com - Coming Soon</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1FAF5A",
+                        "secondary": "#1C7ED6",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122018",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
         }
-        .container {
-            background: white;
-            border-radius: 12px;
-            padding: 60px 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 600px;
+    </script>
+<title>Elsawy Pharmacy - Home</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pt-4 pb-2">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="bg-primary p-2 rounded-full flex items-center justify-center text-white" style="background-color: #1FAF5A;">
+<span class="material-symbols-outlined text-2xl">local_pharmacy</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight text-primary" style="color: #1FAF5A;">Elsawy</h1>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-primary/10 text-primary" style="background-color: rgba(31, 175, 90, 0.1);">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full bg-primary/10 text-primary relative" style="background-color: rgba(31, 175, 90, 0.1);">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+</button>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary/60" style="color: rgba(31, 175, 90, 0.6);">search</span>
+<input class="w-full bg-white dark:bg-slate-800 border-none rounded-full py-3 pl-12 pr-4 shadow-sm focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Search medicines, beauty, baby care..." type="text"/>
+</div>
+</header>
+<main class="px-4 space-y-8 mt-4">
+<!-- Offers Carousel -->
+<section>
+<div class="flex overflow-x-auto gap-4 snap-x no-scrollbar pb-2">
+<div class="min-w-[85%] snap-center rounded-xl overflow-hidden relative h-40 bg-gradient-to-br from-[#1FAF5A] to-[#1C7ED6] text-white p-6 flex flex-col justify-center">
+<div class="z-10">
+<span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Summer Sale</span>
+<h3 class="text-2xl font-bold mt-2">30% Off Vitamins</h3>
+<p class="text-white/80 text-sm">Boost your immunity today</p>
+</div>
+<div class="absolute right-[-20px] bottom-[-20px] opacity-20">
+<span class="material-symbols-outlined text-[120px]">pill</span>
+</div>
+</div>
+<div class="min-w-[85%] snap-center rounded-xl overflow-hidden relative h-40 bg-gradient-to-br from-[#1C7ED6] to-[#1FAF5A] text-white p-6 flex flex-col justify-center">
+<div class="z-10">
+<span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Skincare</span>
+<h3 class="text-2xl font-bold mt-2">Summer Glow</h3>
+<p class="text-white/80 text-sm">Best protection for your skin</p>
+</div>
+<div class="absolute right-[-10px] bottom-[-10px] opacity-20">
+<span class="material-symbols-outlined text-[100px]">face</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Upload Prescription Card -->
+<section class="bg-primary/10 border-2 border-dashed border-primary/30 rounded-xl p-5 flex items-center gap-4" style="background-color: rgba(31, 175, 90, 0.1);">
+<div class="bg-primary text-white p-4 rounded-full flex items-center justify-center" style="background-color: #1FAF5A;">
+<span class="material-symbols-outlined text-3xl">photo_camera</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Upload Prescription</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">Order medicines directly from photo</p>
+</div>
+<span class="material-symbols-outlined text-primary" style="color: #1FAF5A;">arrow_forward_ios</span>
+</section>
+<!-- Categories Grid -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-xl font-bold">Categories</h2>
+<button class="text-primary text-sm font-semibold" style="color: #1FAF5A;">View All</button>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="color: #1FAF5A;">medication</span>
+</div>
+<span class="text-xs font-medium text-center">Medicines</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="color: #1FAF5A;">face_5</span>
+</div>
+<span class="text-xs font-medium text-center">Beauty</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="color: #1FAF5A;">child_care</span>
+</div>
+<span class="text-xs font-medium text-center">Baby Care</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="color: #1FAF5A;">fitness_center</span>
+</div>
+<span class="text-xs font-medium text-center">Wellness</span>
+</div>
+</div>
+</section>
+<!-- Featured Products -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-xl font-bold">Featured Products</h2>
+<button class="text-primary text-sm font-semibold" style="color: #1FAF5A;">View All</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Product Card 1 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm flex flex-col">
+<div class="w-full aspect-square bg-slate-100 dark:bg-slate-700 rounded-lg mb-3 relative flex items-center justify-center">
+<img alt="Medicine Bottle" class="w-full h-full object-cover rounded-lg" data-alt="Professional medical product bottle on plain background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBidJiOkG-rEO4Rx6fDEISIWehmSADpLHhT58biEmh-EMNt62c2TUNQnwkGjEyhRxnemKqero58JfjAGpUSSXxSU4t5d937BZgjrlIvMFXz0IHsxacb-W6smFXko9tA3tL2PoCKYva8X5fNcRL-4GALaufpg-2EpcoKgWqszFNisXE7er6Ht7nIx0WwTZRiymG8LxHSk3iRvmSk6zSPKUbGUPIuq1SBpJ1KRseeCAhpftlSWn5QFy0Z2gAlz1K3kBgCxkF-xlFQIiM3"/>
+<button class="absolute top-2 right-2 p-1.5 bg-white/80 dark:bg-slate-800/80 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<h3 class="font-bold text-sm line-clamp-2 min-h-[40px]">Centrum Adult Multivitamin</h3>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-primary font-bold" style="color: #1FAF5A;">$24.99</span>
+<button class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center" style="background-color: #1FAF5A;">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm flex flex-col">
+<div class="w-full aspect-square bg-slate-100 dark:bg-slate-700 rounded-lg mb-3 relative flex items-center justify-center">
+<img alt="Sunscreen" class="w-full h-full object-cover rounded-lg" data-alt="Dermatological skincare product in elegant packaging" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtBNJFSDF3KRj2mRwTysQIDVCWMWWe8VuoSZRHa519JEcFKZLE_GOEEu9GvIAsdBShVYfGxzYRAqC8rtDx2xbknJakvPXj9e0GuglbIWXCB0qqnFghJRFDtIyieZpGUR8uBzMe80qbeZqcajvFwET6OnbuR0bXGEqJH2AhfhQm9jBz5ntHYO0cdw-I4nEEM2lyfHApPAVpq76mmIu8MkcLj-vnmxDR0Ok6WUOIX5ineUsaWtRdPgw8THjXynjI1wAHPXFYNZxnRYza"/>
+<button class="absolute top-2 right-2 p-1.5 bg-white/80 dark:bg-slate-800/80 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-sm text-red-500 fill-1">favorite</span>
+</button>
+</div>
+<h3 class="font-bold text-sm line-clamp-2 min-h-[40px]">La Roche-Posay Anthelios SPF 50</h3>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-primary font-bold" style="color: #1FAF5A;">$32.50</span>
+<button class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center" style="background-color: #1FAF5A;">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm flex flex-col">
+<div class="w-full aspect-square bg-slate-100 dark:bg-slate-700 rounded-lg mb-3 relative flex items-center justify-center">
+<img alt="Baby Oil" class="w-full h-full object-cover rounded-lg" data-alt="Gentle baby care product with soft packaging" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLDeWU5s0xRe1ZOCiSFSaiTWcBi9OylxsxqAMlpt6zwsJkD3zc-CLwsWG2cyTgBmdM7VFgUMtPMRQpASOl-WAf1bHudkTOxivHfdLhK6L8bNf0qPXS2PDxSbXTSwf6sywrFAfqQ7vN_1kMGj0d-k0Imf1F4VcZ0gJ8gLr_4J31DI_T1wVSmzmfa2wXaMqGABNoAQMBkIXTgkojGCA4cyeq0Gm1obALfuAvIHd1-4C1LLrNSJblknFM9mUQ2czvClc397RGYaiIrSsL"/>
+<button class="absolute top-2 right-2 p-1.5 bg-white/80 dark:bg-slate-800/80 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<h3 class="font-bold text-sm line-clamp-2 min-h-[40px]">Johnson's Baby Gentle Lotion</h3>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-primary font-bold" style="color: #1FAF5A;">$8.25</span>
+<button class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center" style="background-color: #1FAF5A;">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm flex flex-col">
+<div class="w-full aspect-square bg-slate-100 dark:bg-slate-700 rounded-lg mb-3 relative flex items-center justify-center">
+<img alt="Omega 3" class="w-full h-full object-cover rounded-lg" data-alt="Nutritional supplement capsules in amber glass jar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAljbYWvxJihj4Da5MbGaey7ofXt_JlmPIKogWEu6gNk1qYHEokZlhqrOFydppDbNk69Tc3LUUJtijJq3PeXWsQa3h6JK1e66gzlyBez_Y5ZoflcM-kBCTlJGHY78xeIMVmBcDAtLPxmD2SRt24_2ILSg7z9NRotF-C14bMroajr8KRsbLf8muOhrZVxGoa4WBf_8eqHPvf-m_yTOf8ShoW4hMZz73iJRP3o7UG-ST7zYo9uEOX80C6QfmTSNxblB-eNGgq7BAKxuC_"/>
+<button class="absolute top-2 right-2 p-1.5 bg-white/80 dark:bg-slate-800/80 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<h3 class="font-bold text-sm line-clamp-2 min-h-[40px]">Nature's Way Omega-3 Fish Oil</h3>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-primary font-bold" style="color: #1FAF5A;">$19.99</span>
+<button class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center" style="background-color: #1FAF5A;">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-2 py-3 z-[60]">
+<div class="flex items-center justify-around">
+<a class="flex flex-col items-center gap-1 text-primary" href="#" style="color: #1FAF5A;">
+<span class="material-symbols-outlined fill-1">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] font-medium">Categories</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">sell</span>
+<span class="text-[10px] font-medium">Offers</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px] font-medium">Orders</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            word-break: break-word;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        p {
-            color: #666;
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-        .emoji {
-            font-size: 4em;
-            margin-bottom: 20px;
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="emoji">🚀</div>
-        <h1>contribution.usercontent.com</h1>
-        <p>This domain is coming soon.</p>
-    </div>
-</body>
-</html>
+</body></html>

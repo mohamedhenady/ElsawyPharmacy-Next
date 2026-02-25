@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تتبع الطلب - صيدلية الصاوي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1fad5a",
+                "secondary": "#1C7ED6",
+                "background-light": "#f6f8f7",
+                "background-dark": "#122018",
+              },
+              fontFamily: {
+                "display": ["Noto Sans Arabic", "Manrope", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }</script>
+<style>
+        body {
+            font-family: 'Noto Sans Arabic', 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto bg-white dark:bg-background-dark min-h-screen shadow-xl flex flex-col">
+<!-- Header -->
+<header class="flex items-center p-4 sticky top-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-10 border-b border-slate-100 dark:border-slate-800">
+<button class="size-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold">تتبع طلبك</h1>
+<div class="size-10"></div>
+</header>
+<main class="flex-1 p-4 space-y-6">
+<!-- Order Summary Card -->
+<div class="bg-primary/10 dark:bg-primary/20 border border-primary/30 p-5 rounded-xl flex items-center gap-4">
+<div class="flex-1">
+<h2 class="text-sm font-medium text-slate-500 dark:text-slate-400">رقم الطلب</h2>
+<p class="text-xl font-bold text-primary">#ELS-88294</p>
+<div class="mt-2 flex items-center gap-2 text-secondary font-semibold">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-sm">وقت الوصول المتوقع: 10:45 م</span>
+</div>
+</div>
+<div class="size-20 bg-white dark:bg-slate-800 rounded-lg p-2 flex items-center justify-center shadow-sm">
+<div class="w-full h-full bg-slate-100 dark:bg-slate-700 rounded flex items-center justify-center" data-alt="Package of medicines with pharmacy logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQm8p_6sxEffuT9953ArqYs67GaI1JeK1U9pDAn8NSYvIKa0M26GQs-i1e-OinBB3rD_HsLBcsHGDyEB1m3fMcXQQSDk7LUMmmECo3q5a3NpTM_SFxgefbQFMNOe5UEjqICta62CFKvfk3Na0Li2oE0VeDYoIPV8zA-rpjfCY0of_0G3ky85mcaZtOmysraw9XPgsI-qtCPVnv0QXHtTT7pJ-xkaOgfDUFNvbYswr3scMEQ7Vl4YWE3mjVPYJrEbos_aLZFffPVlYe"); background-size: cover;'>
+</div>
+</div>
+</div>
+<!-- Tracking Timeline -->
+<div class="space-y-0 relative px-4">
+<!-- Vertical Line -->
+<div class="absolute right-[27px] top-4 bottom-4 w-1 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+<!-- Step 1: Completed -->
+<div class="relative flex gap-6 pb-8 group">
+<div class="z-10 size-7 bg-primary rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-white text-lg">check</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-primary">تم استلام الطلب</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">لقد بدأنا في معالجة طلبك</p>
+<span class="text-xs font-medium text-slate-400 mt-1 block">10:00 م</span>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="relative flex gap-6 pb-8 group">
+<div class="z-10 size-7 bg-primary rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-white text-lg">check</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-primary">جاري التحضير</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">الصيدلي يقوم بتجهيز أدويتك</p>
+<span class="text-xs font-medium text-slate-400 mt-1 block">10:15 م</span>
+</div>
+</div>
+<!-- Step 3: Current -->
+<div class="relative flex gap-6 pb-8 group">
+<div class="z-10 size-7 bg-secondary rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark animate-pulse">
+<span class="material-symbols-outlined text-white text-lg">delivery_dining</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-secondary">جاري التوصيل</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">المندوب في الطريق إليك الآن</p>
+<span class="font-bold text-secondary">الآن</span>
+</div>
+</div>
+<!-- Step 4: Pending -->
+<div class="relative flex gap-6 group">
+<div class="z-10 size-7 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 text-lg">home</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-slate-400 dark:text-slate-600">تم التسليم</h3>
+<p class="text-sm text-slate-400 dark:text-slate-600">استلام الطلب وتأكيد الجودة</p>
+</div>
+</div>
+</div>
+<!-- Courier Info -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl space-y-4">
+<h3 class="text-sm font-bold text-slate-500 dark:text-slate-400">معلومات المندوب</h3>
+<div class="flex items-center gap-4">
+<div class="size-14 rounded-full overflow-hidden border-2 border-primary/20" data-alt="Profile photo of the delivery person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDi0Q9iRrJLNmIJmT6EdUTOLJceQltasXTyeRUx7Y56KgCGQCh_LS7KElV9TogA5qUaxQULT4L5RFejzoNqU17BYmXLznVQ1ULlhPHiYxHFqRG0bxRB2QryfDAtyRDtuCRaDbGs-bSOgpDuhzOHeJjrq4zCU7dtTr9kVdmcAzoRqiP1XSTqbS6dnk3wFrt8qOUGecm386qNIcRpJ6-6ZBNTa47gDcysY19n5luFRT8SsaiUtwl558L8kVr_cgfk0_V1hjvJKiLNpfMw"); background-size: cover;'>
+</div>
+<div class="flex-1">
+<p class="font-bold">أحمد محمود</p>
+<div class="flex items-center text-xs text-yellow-500 gap-1">
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span>4.8 (120 تقييم)</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="size-10 bg-secondary text-white rounded-full flex items-center justify-center shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="size-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Map View Placeholder -->
+<div class="relative h-48 w-full rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800">
+<div class="absolute inset-0 bg-slate-100" data-alt="Map showing delivery route in Cairo city" data-location="Cairo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCKzxzPj8a4Q6AiSsguMVnnsD6ui-aJ-bkHh53Mr0oZicGvXpEuyHf9ckFkHSB-yd4czEvogtLOz3h5M0sr8tbp8MXvtdgx5GScB9mYHbiRTw-HmrKxmvaz0bpK4iv8ZKUC8Q-3-Uujt_YlZInsEQjmR3BXg1wtImHuCvvgLO0yLpqh1g27zu_XL3kSASROi4o3Z_QWK4OtJl-URgWRZeaIMZG30VwbtviERl2sy7FD7diqX5K0INiP08WAUXxaUYyYXpUmcWdc2AOp"); background-size: cover; background-position: center;'>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute bottom-3 left-3 bg-white dark:bg-background-dark px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                    المندوب على بعد 2 كم
+                </div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="border-t border-slate-100 dark:border-slate-800 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md pb-6 pt-2 px-6 flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">receipt_long</span>
+<span class="text-[10px] font-bold">طلباتي</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">local_offer</span>
+<span class="text-[10px] font-medium">العروض</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">حسابي</span>
+</a>
+</nav>
+</div>
+</body></html>

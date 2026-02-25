@@ -1,125 +1,104 @@
 "use client"
 
 import { useState } from "react"
-import { createClient } from "@/lib/supabase-browser"
-import { useRouter } from "next/navigation"
+import { motion } from "framer-motion"
+import { Phone, Lock, Eye, EyeOff, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import { Loader2, LogIn, Mail, Lock } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function LoginPage() {
-    const supabase = createClient()
-    const router = useRouter()
-    const [loading, setLoading] = useState(false)
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [error, setError] = useState<string | null>(null)
-
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setLoading(true)
-        setError(null)
-
-        try {
-            if (!supabase) throw new Error("Supabase is not configured")
-
-            const { error } = await supabase.auth.signInWithPassword({
-                email,
-                password
-            })
-
-            if (error) throw error
-
-            router.push('/admin')
-            router.refresh()
-        } catch (err: any) {
-            setError(err.message || "فشل تسجيل الدخول. يرجى التحقق من بياناتك.")
-        } finally {
-            setLoading(false)
-        }
-    }
+    const [showPassword, setShowPassword] = useState(false)
 
     return (
-        <div className="min-h-screen grid lg:grid-cols-2" dir="rtl">
-            <div className="flex items-center justify-center p-8 bg-white">
-                <div className="w-full max-w-md space-y-8">
-                    <div className="space-y-2 text-right">
-                        <Badge className="bg-primary/10 text-primary border-none">لوحة التحكم</Badge>
-                        <h1 className="text-4xl font-black text-slate-900 tracking-tight">تسجيل الدخول</h1>
-                        <p className="text-muted-foreground font-medium">مرحباً بك مجدداً في صيدلية الشروق.</p>
+        <div className="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="w-full max-w-[440px] bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden p-8 border border-slate-100 dark:border-slate-800"
+            >
+                {/* Header / Logo Section */}
+                <div className="flex flex-col items-center mb-10">
+                    <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        className="w-20 h-20 mb-6 flex items-center justify-center rounded-full bg-primary/10"
+                    >
+                        <Image
+                            src="/logo.png"
+                            alt="Elsawy Pharmacy Logo"
+                            width={64}
+                            height={64}
+                            className="w-12 h-12 object-contain"
+                        />
+                    </motion.div>
+                    <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 text-center">أهلاً بك مجدداً</h1>
+                    <p className="text-slate-500 dark:text-slate-400 mt-2 text-center">سجل دخولك إلى حساب صيدلية الصاوي</p>
+                </div>
+
+                {/* Form Section */}
+                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                    {/* Phone Field */}
+                    <div className="flex flex-col gap-2">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 mr-1">رقم الهاتف</label>
+                        <div className="relative group">
+                            <Phone className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary w-5 h-5" />
+                            <Input
+                                className="w-full pr-12 pl-4 py-7 rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus-visible:ring-primary/20 transition-all outline-none"
+                                placeholder="01x xxxx xxxx"
+                                type="tel"
+                            />
+                        </div>
                     </div>
 
-                    <form onSubmit={handleLogin} className="space-y-6">
-                        {error && (
-                            <div className="p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-bold text-center">
-                                {error}
-                            </div>
-                        )}
-                        <div className="space-y-2">
-                            <Label htmlFor="email">البريد الإلكتروني</Label>
-                            <div className="relative">
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    placeholder="name@example.com"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="pl-10 pr-4 h-14 rounded-2xl bg-slate-50 border-slate-100 focus:bg-white transition-all text-left"
-                                />
-                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            </div>
+                    {/* Password Field */}
+                    <div className="flex flex-col gap-2">
+                        <div className="flex justify-between items-center px-1">
+                            <label className="text-sm font-bold text-slate-700 dark:text-slate-300">كلمة المرور</label>
                         </div>
-                        <div className="space-y-2">
-                            <div className="flex justify-between items-center">
-                                <Label htmlFor="password">كلمة المرور</Label>
-                                <Link href="#" className="text-xs text-primary font-bold hover:underline">نسيت كلمة المرور؟</Link>
-                            </div>
-                            <div className="relative">
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="pl-10 pr-4 h-14 rounded-2xl bg-slate-50 border-slate-100 focus:bg-white transition-all text-left"
-                                />
-                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            </div>
+                        <div className="relative group">
+                            <Lock className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary w-5 h-5" />
+                            <Input
+                                className="w-full pr-12 pl-12 py-7 rounded-2xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus-visible:ring-primary/20 transition-all outline-none"
+                                placeholder="••••••••"
+                                type={showPassword ? "text" : "password"}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                            >
+                                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                            </button>
                         </div>
+                        <div className="flex justify-start mt-1">
+                            <Link className="text-sm font-bold text-primary hover:underline" href="/forgot-password">نسيت كلمة المرور؟</Link>
+                        </div>
+                    </div>
 
-                        <Button disabled={loading} className="w-full h-14 rounded-2xl text-lg font-black shadow-lg shadow-primary/20">
-                            {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : "دخول"}
-                            <LogIn className="mr-2 w-5 h-5" />
-                        </Button>
-                    </form>
+                    {/* Login Button */}
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white font-black py-7 rounded-2xl shadow-lg shadow-primary/20 mt-4 text-lg">
+                        تسجيل الدخول
+                    </Button>
 
-                    <div className="text-center">
-                        <p className="text-sm text-muted-foreground">
-                            ليس لديك حساب؟{" "}
-                            <Link href="/register" className="text-primary font-black hover:underline">
-                                إنشاء حساب جديد
-                            </Link>
+                    {/* Register Link */}
+                    <div className="pt-6 text-center">
+                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
+                            ليس لديك حساب؟
+                            <Link className="text-primary font-black hover:underline mr-1" href="/register">أنشئ حساباً جديداً</Link>
                         </p>
                     </div>
-                </div>
-            </div>
+                </form>
 
-            <div className="hidden lg:flex flex-col items-center justify-center p-12 bg-slate-900 text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] translateY-1/2 -translateX-1/2" />
-
-                <div className="relative z-10 text-center space-y-8 max-w-lg">
-                    <div className="w-24 h-24 bg-primary rounded-[2rem] mx-auto flex items-center justify-center text-5xl shadow-2xl rotate-12">
-                        💊
-                    </div>
-                    <h2 className="text-5xl font-black leading-tight">النظام الأذكى لإدارة <br /><span className="text-primary italic">صيدليتك</span></h2>
-                    <p className="text-xl text-slate-400 leading-relaxed font-medium">لوحة تحكم احترافية لمتابعة المبيعات، الطلبات، والمخزون في مكان واحد وبكل سهولة.</p>
+                {/* Footer Decoration */}
+                <div className="mt-10 flex justify-center gap-2">
+                    <div className="h-1.5 w-10 rounded-full bg-primary"></div>
+                    <div className="h-1.5 w-3 rounded-full bg-primary/20"></div>
+                    <div className="h-1.5 w-3 rounded-full bg-primary/20"></div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }

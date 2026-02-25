@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { useCartStore } from "@/store/useCartStore"
+import { Badge } from "@/components/ui/badge"
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -125,6 +126,7 @@ export function Navbar() {
                     <Link href="/products?category=medicines" className="text-foreground hover:text-primary transition-all hover:bg-primary/5 px-3 py-1 rounded-lg">الأدوية</Link>
                     <Link href="/products?category=cosmetics" className="text-foreground hover:text-primary transition-all hover:bg-primary/5 px-3 py-1 rounded-lg">العناية والجمال</Link>
                     <Link href="/products?category=baby" className="text-foreground hover:text-primary transition-all hover:bg-primary/5 px-3 py-1 rounded-lg">الطفل والرضع</Link>
+                    <Link href="/prescription" className="text-primary font-black hover:text-primary/80 px-3 py-1 bg-primary/5 rounded-lg flex items-center gap-2">رفع روشتة <Badge className="bg-primary text-white text-[10px] px-1.5 py-0">جديد</Badge></Link>
                     <Link href="/products?category=offers" className="text-red-500 font-black hover:text-red-600 px-3 py-1 bg-red-50 rounded-lg animate-pulse">العروض الحصرية</Link>
                 </nav>
             </div>
@@ -144,6 +146,7 @@ export function Navbar() {
                         <Link href="/products?category=medicines" className="font-medium p-3 hover:bg-slate-50 rounded-xl">الأدوية</Link>
                         <Link href="/products?category=cosmetics" className="font-medium p-3 hover:bg-slate-50 rounded-xl">العناية والجمال</Link>
                         <Link href="/products?category=baby" className="font-medium p-3 hover:bg-slate-50 rounded-xl">الطفل والرضع</Link>
+                        <Link href="/prescription" className="font-medium p-3 hover:bg-slate-50 rounded-xl flex items-center gap-2">رفع روشتة <Badge className="bg-primary text-white text-[10px]">جديد</Badge></Link>
                         <Link href="/products?category=offers" className="font-black text-red-500 p-3 hover:bg-red-50 rounded-xl">العروض</Link>
                     </nav>
                 </div>
@@ -151,4 +154,3 @@ export function Navbar() {
         </header>
     )
 }
-

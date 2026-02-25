@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Noto+Sans+Arabic:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1fad5a",
+                        "secondary": "#1c7ed6",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122018",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Sans Arabic", "Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        body {
+            font-family: 'Noto Sans Arabic', 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-full min-h-screen w-full max-w-md mx-auto flex-col bg-background-light dark:bg-background-dark overflow-x-hidden shadow-2xl border-x border-slate-200 dark:border-slate-800">
+<!-- Header -->
+<div class="sticky top-0 z-10 flex items-center bg-white dark:bg-slate-900 p-4 border-b border-slate-100 dark:border-slate-800 justify-between">
+<div class="flex items-center gap-3">
+<button class="text-slate-900 dark:text-slate-100 flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-tight">عناوين التوصيل</h2>
+</div>
+<div class="flex items-center">
+<button class="flex size-10 items-center justify-center rounded-full bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined">map</span>
+</button>
+</div>
+</div>
+<!-- Content -->
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Add New Address Button -->
+<div class="p-4">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add_location_alt</span>
+<span>إضافة عنوان جديد</span>
+</button>
+</div>
+<!-- Current Location Quick Access -->
+<div class="px-4 py-2">
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-secondary/20">
+<div class="flex size-12 items-center justify-center rounded-full bg-secondary/10 text-secondary shrink-0">
+<span class="material-symbols-outlined">my_location</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-sm font-bold text-secondary">الموقع الحالي</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">تحديد موقعي الحالي بدقة</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_left</span>
+</div>
+</div>
+<h3 class="text-slate-900 dark:text-slate-100 text-md font-bold leading-tight px-4 pb-2 pt-6">العناوين المحفوظة</h3>
+<!-- Address List -->
+<div class="space-y-3 px-4">
+<!-- Home Address -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="text-primary flex items-center justify-center rounded-xl bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<div class="flex items-center gap-2">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold line-clamp-1">المنزل</p>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold">افتراضي</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal line-clamp-2">١٢ شارع النصر، المعادي، القاهرة، الدور الرابع، شقة ٤٢</p>
+</div>
+<div class="flex flex-col gap-2 shrink-0">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Work Address -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="text-slate-600 dark:text-slate-400 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 shrink-0 size-12">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold line-clamp-1">العمل</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal line-clamp-2">مبنى ب، القرية الذكية، طريق مصر اسكندرية الصحراوي، الجيزة</p>
+</div>
+<div class="flex flex-col gap-2 shrink-0">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Other Address -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="text-slate-600 dark:text-slate-400 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 shrink-0 size-12">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold line-clamp-1">بيت العائلة</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal line-clamp-2">حي الأشجار، مدينة السادس من أكتوبر، فيلا ٢٢</p>
+</div>
+<div class="flex flex-col gap-2 shrink-0">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Map View Area (Mock) -->
+<div class="mt-8 px-4 pb-8">
+<div class="relative w-full h-48 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
+<img class="w-full h-full object-cover grayscale-[0.5] opacity-80" data-alt="Abstract map view with pins for location management" data-location="Cairo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5B6IKONSBDIIEbJoJbnwGNuFnJT-0DLZU3gMpkwPpJfxXJLc7wC628HTCxXc--5E9UvpyKeQW1NGMxPkW_7r_RWLg7hOZyqxZ2mMuqF8x2MvuEe8rummdPvTKacFLx8uKIkRckRxjp_o7_JNgcyY-LDIAyWEsbiWPs9jwEZlGSwXeDkEc9lB3hgf-TO5-_25v9i7ULNNdR9KEfgO031GwbyCwTFz8xfSfGOnStcy0ln0qMU0f3itlOJAbqJMa50o1pEM7qI-KYZuX"/>
+<div class="absolute inset-0 bg-secondary/10 flex items-center justify-center">
+<div class="bg-white dark:bg-slate-900 px-4 py-2 rounded-full shadow-lg border border-secondary/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">zoom_in</span>
+<span class="text-sm font-bold">عرض جميع العناوين على الخريطة</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-20">
+<div class="flex gap-2 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-6 pt-3 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500 transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<p class="text-[10px] font-medium leading-normal">الرئيسية</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500 transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">receipt_long</span>
+<p class="text-[10px] font-medium leading-normal">طلباتي</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<p class="text-[10px] font-bold leading-normal">العناوين</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500 transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<p class="text-[10px] font-medium leading-normal">الحساب</p>
+</a>
+</div>
+</div>
+</div>
+</body></html>
