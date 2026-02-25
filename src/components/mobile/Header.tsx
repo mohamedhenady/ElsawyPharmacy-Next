@@ -28,11 +28,11 @@ export function MobileHeader() {
 
             {/* Search Bar */}
             <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/60 w-5 h-5" />
+                <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/60 w-5 h-5" />
                 <Input
                     type="text"
                     placeholder="ابحث عن أدوية، مستحضرات تجميل..."
-                    className="w-full bg-white dark:bg-slate-800 border-none rounded-full py-6 pl-12 shadow-sm focus-visible:ring-2 focus-visible:ring-primary/50"
+                    className="w-full bg-white dark:bg-slate-800 border-none rounded-full py-6 pr-12 shadow-sm focus-visible:ring-2 focus-visible:ring-primary/50"
                 />
             </div>
         </header>

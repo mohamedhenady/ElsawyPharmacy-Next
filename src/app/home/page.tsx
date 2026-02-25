@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export default function HomePage() {
     return (
-        <div className="flex flex-col min-h-screen pb-24 bg-background-light dark:bg-background-dark">
+        <div className="flex flex-col min-h-screen pb-24 bg-background dark:bg-background-dark">
             <MobileHeader />
 
             <main className="px-4 space-y-6 mt-4">
