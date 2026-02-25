@@ -28,7 +28,7 @@ async function main() {
         },
     })
 
-    const catBaby = await prisma.category.upsert({
+    await prisma.category.upsert({
         where: { id: 'baby-care' },
         update: {},
         create: {

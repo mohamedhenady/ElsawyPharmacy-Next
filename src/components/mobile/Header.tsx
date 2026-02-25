@@ -4,7 +4,6 @@ import { Bell, ShoppingCart, Search, PlusCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import Image from "next/image"
 
 export function MobileHeader() {
     return (

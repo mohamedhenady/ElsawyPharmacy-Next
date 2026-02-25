@@ -11,7 +11,7 @@ export default function SplashScreen() {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setProgress((prev) => {
+            setProgress((prev: number) => {
                 if (prev >= 100) {
                     clearInterval(timer)
                     setTimeout(() => {

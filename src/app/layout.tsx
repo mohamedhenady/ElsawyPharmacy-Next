@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Noto_Sans_Arabic, Manrope } from "next/font/google";
+import { Noto_Sans_Arabic, Manrope } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 

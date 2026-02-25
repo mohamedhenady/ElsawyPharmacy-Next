@@ -1,9 +1,8 @@
 import { MobileHeader } from "@/components/mobile/Header"
 import { MobileBottomNav } from "@/components/mobile/BottomNav"
-import { Camera, ChevronRight, Pill, User, Gift, Heart, Plus, ShoppingBag } from "lucide-react"
+import { Camera, ChevronRight, Pill, User, Gift, Heart, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import Image from "next/image"
 import Link from "next/link"
 
 export default function HomePage() {

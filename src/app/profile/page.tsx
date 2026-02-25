@@ -10,15 +10,11 @@ import {
     ShieldCheck,
     HelpCircle,
     LogOut,
-    ChevronLeft,
     Camera,
-    PlusCircle,
     Settings,
     ArrowRight
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { MobileBottomNav } from "@/components/mobile/BottomNav"
-import Link from "next/link"
 
 const MENU_ITEMS = [
     { id: "orders", icon: History, label: "طلباتي السابقة", color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-500/10" },

@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { motion } from "framer-motion"
 import { Camera, Image as ImageIcon, FileText, Send, Info, ArrowRight, FileEdit } from "lucide-react"
 import { Button } from "@/components/ui/button"

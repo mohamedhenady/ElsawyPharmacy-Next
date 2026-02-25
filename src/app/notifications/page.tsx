@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Bell, Package, Tag, Clock, CheckCircle, Gift, Settings, ArrowRight } from "lucide-react"
+import { Package, Tag, Clock, CheckCircle, Gift, Settings, ArrowRight } from "lucide-react"
 import { MobileBottomNav } from "@/components/mobile/BottomNav"
 import { cn } from "@/lib/utils"
 import Link from "next/link"

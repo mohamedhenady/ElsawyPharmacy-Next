@@ -2,11 +2,10 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, ChevronRight, CreditCard, MapPin } from "lucide-react"
+import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, CreditCard, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MobileBottomNav } from "@/components/mobile/BottomNav"
 import Link from "next/link"
-import Image from "next/image"
 
 const CART_ITEMS = [
     { id: 1, name: "Centrum Adult Multivitamin", price: 24.99, quantity: 1, image: "/product1.png" },
@@ -14,7 +13,7 @@ const CART_ITEMS = [
 ]
 
 export default function CartPage() {
-    const [items, setItems] = useState(CART_ITEMS)
+    const [items] = useState(CART_ITEMS)
 
     const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0)
     const delivery = 5.00
