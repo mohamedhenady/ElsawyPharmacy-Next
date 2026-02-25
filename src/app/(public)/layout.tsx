@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Navbar } from "@/components/shared/Navbar"
 import { ChevronLeft, PhoneCall } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 export default function PublicLayout({
     children,
@@ -53,6 +54,7 @@ export default function PublicLayout({
                         <div className="space-y-8">
                             <h3 className="font-black text-xl border-b border-white/10 pb-4 inline-block">خدماتنا</h3>
                             <ul className="space-y-4 font-bold">
+                                <li><Link href="/prescription" className="text-primary hover:text-white transition-all flex items-center gap-2">رفع روشتة <Badge className="bg-primary/20 text-primary text-[10px] px-2 py-0">جديد</Badge></Link></li>
                                 <li><Link href="/faq" className="text-slate-400 hover:text-primary transition-all">الأسئلة الشائعة</Link></li>
                                 <li><Link href="/shipping" className="text-slate-400 hover:text-primary transition-all">سياسة التوصيل</Link></li>
                                 <li><Link href="/contact" className="text-slate-400 hover:text-primary transition-all">اتصل بنا</Link></li>

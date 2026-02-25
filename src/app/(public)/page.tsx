@@ -8,7 +8,8 @@ import {
     Truck,
     CreditCard,
     Star,
-    ShoppingCart
+    ShoppingCart,
+    Camera
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -140,7 +141,25 @@ export default function HomePage() {
 
             {/* Features */}
             <section className="container mx-auto px-4 -mt-16 relative z-20">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0 }}
+                        whileHover={{ y: -5 }}
+                        className="flex gap-5 p-8 bg-primary text-white rounded-[2rem] group cursor-pointer shadow-2xl shadow-primary/30"
+                    >
+                        <Link href="/prescription" className="flex gap-5 w-full">
+                            <div className="p-4 rounded-2xl bg-white/20 text-white h-fit shadow-inner">
+                                <Camera className="w-8 h-8" />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-xl mb-1">رفع روشتة</h3>
+                                <p className="text-sm text-white/80 leading-relaxed">أرسل صورة الروشتة وسنتواصل معك فوراً</p>
+                            </div>
+                        </Link>
+                    </motion.div>
                     {[
                         { icon: ShieldCheck, title: "منتجات أصلية 100%", desc: "جميع منتجاتنا مرخصة وموثوقة من الوكلاء" },
                         { icon: Truck, title: "توصيل سريع", desc: "توصيل طلباتك حتى باب المنزل في غضون ساعتين" },
@@ -151,7 +170,7 @@ export default function HomePage() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
+                            transition={{ delay: (i + 1) * 0.1 }}
                             whileHover={{ y: -5 }}
                             className="flex gap-5 p-8 glass-card rounded-[2rem] group cursor-default"
                         >

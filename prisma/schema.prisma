@@ -59,9 +59,27 @@ model Profile {
   phone     String?
   role      String   @default("customer") // "customer" or "admin"
   orders    Order[]
+  prescriptions Prescription[]
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("profiles")
+}
+
+model Prescription {
+  id          String   @id @default(cuid())
+  fullName    String   @map("full_name")
+  phone       String
+  address     String
+  notes       String?
+  imageUrl    String   @map("image_url")
+  status      PrescriptionStatus @default(PENDING)
+  
+  userId      String?  @map("user_id") @db.Uuid
+  user        Profile? @relation(fields: [userId], references: [id])
+  
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("prescriptions")
 }
 
 model Order {
@@ -104,4 +122,11 @@ enum OrderStatus {
   DELIVERED
   CANCELLED
   REFUNDED
+}
+
+enum PrescriptionStatus {
+  PENDING
+  REVIEWED
+  COMPLETED
+  CANCELLED
 }
